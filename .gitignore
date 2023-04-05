@@ -1,0 +1,7 @@
+\.vs
+\.idea
+
+
+# Output
+/bin/*
+/obj/*
