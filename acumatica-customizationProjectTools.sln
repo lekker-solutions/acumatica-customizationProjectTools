@@ -12,6 +12,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "info", "info", "{8B098785-9
 		README.md = README.md
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AcuPackageTools.Tests", "AcuPackageTools.Tests\AcuPackageTools.Tests.csproj", "{78FB9855-8D33-4E8B-9C30-4880CA57E196}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "actions", "actions", "{1956547E-C3AB-4595-BF5D-3090ABE76DD4}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\publish.yml = .github\workflows\publish.yml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -22,9 +29,16 @@ Global
 		{C73674DC-5DAF-40B1-8DD6-E742B44F6291}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C73674DC-5DAF-40B1-8DD6-E742B44F6291}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C73674DC-5DAF-40B1-8DD6-E742B44F6291}.Release|Any CPU.Build.0 = Release|Any CPU
+		{78FB9855-8D33-4E8B-9C30-4880CA57E196}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{78FB9855-8D33-4E8B-9C30-4880CA57E196}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{78FB9855-8D33-4E8B-9C30-4880CA57E196}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{78FB9855-8D33-4E8B-9C30-4880CA57E196}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{1956547E-C3AB-4595-BF5D-3090ABE76DD4} = {8B098785-917D-417F-837E-1316AFD81AC1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D3181DA9-D8B4-4D20-A2BC-15C50E8FEC98}
