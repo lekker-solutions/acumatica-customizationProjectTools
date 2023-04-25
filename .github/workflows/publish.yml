@@ -1,0 +1,14 @@
+name: Publish PowerShell Module
+on:
+  push:
+    branches:
+      - main
+jobs:
+  publish:
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install PowerShell Gallery module
+      run: Install-Module -Name PowerShellGet -Force
+    - name: Publish module to PowerShell Gallery
+      run: Publish-Module -Path . -NuGetApiKey ${{ secrets.POWERSHELL_GALLERY_API_KEY }} -Verbose
