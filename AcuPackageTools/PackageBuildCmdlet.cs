@@ -25,7 +25,7 @@ namespace AcuPackageTools
             Mandatory = true,
             ValueFromPipeline = true,
             ValueFromPipelineByPropertyName = true)]
-        [Alias("l")]
+        [Alias("pv")]
         public string ProductVersion { get; set; }
 
         [Parameter(
