@@ -7,13 +7,17 @@
 // ----------------------------------------------------------------------------------
 #endregion
 
+using System;
+using System.IO;
 using System.ServiceModel;
+using System.Threading.Tasks;
+using AcmPackageTools.Service;
 
-namespace Velixo.Common.CustomizationPackageTools
+namespace AcuPackageTools
 {
     public class PackagePublisher
     {
-        public static async Task PublishCustomizationPackage(string packageFilename, string packageName, string url, string username, string password)
+        public static void PublishCustomizationPackage(string packageFilename, string packageName, string url, string username, string password, bool replaceIfPackageExists = true)
         {
             BasicHttpBinding binding = new BasicHttpBinding() {  AllowCookies = true };
             binding.Security.Mode  = BasicHttpSecurityMode.Transport;
@@ -23,16 +27,16 @@ namespace Velixo.Common.CustomizationPackageTools
             
             EndpointAddress address = new EndpointAddress(url + "/api/ServiceGate.asmx");
             
-            var gate = new ServiceGate.ServiceGateSoapClient(binding, address);
+            var gate = new ServiceGateSoapClient(binding, address);
 
             Console.WriteLine($"Logging in to {url}...");
-            await gate.LoginAsync(username, password);
+            gate.LoginAsync(new LoginRequest(username, password));
             Console.WriteLine($"Uploading package...");
-            await gate.UploadPackageAsync(packageName, File.ReadAllBytes(packageFilename), true);
+            gate.UploadPackageAsync(new UploadPackageRequest(packageName, File.ReadAllBytes(packageFilename), replaceIfPackageExists));
             Console.WriteLine($"Publishing customizations...");
-            await gate.PublishPackagesAsync(new string[] { packageName }, true);
+            gate.PublishPackages(new PublishPackagesRequest(new [] { packageName }, true));
             Console.WriteLine($"Logging out...");
-            await gate.LogoutAsync();
+            gate.LogoutAsync(new LogoutRequest());
         }
 
         public const string LoginUrl        = "/entity/auth/login";
@@ -42,7 +46,7 @@ namespace Velixo.Common.CustomizationPackageTools
         public const string EndPublishUrl = "/CustomizationApi/EndPublish";
         
 
-        public static async Task PublishCustomizationPackageREST(string packageFilename, string packageName, string url,
+        public static void PublishCustomizationPackageREST(string packageFilename, string packageName, string url,
                                                              string username,        string password)
         {
 

@@ -7,7 +7,10 @@
 // ----------------------------------------------------------------------------------
 #endregion
 
-namespace Velixo.Common.CustomizationPackageTools.Models
+using System;
+using System.Collections.Generic;
+
+namespace AcuPackageTools.Models
 {
     public class CustomizationResponse
     {

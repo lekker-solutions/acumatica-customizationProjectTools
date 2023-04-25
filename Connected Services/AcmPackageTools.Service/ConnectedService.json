@@ -1,0 +1,22 @@
+{
+  "ExtendedData": {
+    "inputs": [
+      "https://demo.velixo.com/api/ServiceGate.asmx"
+    ],
+    "collectionTypes": [
+      "System.Collections.Generic.Dictionary`2",
+      "System.Collections.Generic.List`1"
+    ],
+    "internalTypeAccess": true,
+    "messageContract": true,
+    "namespaceMappings": [
+      "*, AcmPackageTools.Service"
+    ],
+    "references": [
+      "System.Management.Automation, {PowerShellStandard.Library, 5.1.0-preview-06}"
+    ],
+    "sync": true,
+    "targetFramework": "netstandard2.0",
+    "typeReuseMode": "All"
+  }
+}

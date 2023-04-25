@@ -7,7 +7,7 @@
 // ----------------------------------------------------------------------------------
 #endregion
 
-namespace Velixo.Common.CustomizationPackageTools.Models
+namespace AcuPackageTools.Models
 {
     public class StartPublishRequest
     {
