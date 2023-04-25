@@ -19,4 +19,4 @@ jobs:
     - name: Test Module before Publish
       run: Test-ModuleManifest -Path .\AcuPackageTools\AcuPackageTools.psd1
     - name: Publish to PowerShell Gallery
-      run: Publish-Module -Path AcuPackageTools.psd1 -NuGetApiKey ${{ secrets.POWERSHELL_GALLERY_API_KEY }}
+      run: Publish-Module -Path .\AcuPackageTools -NuGetApiKey ${{ secrets.POWERSHELL_GALLERY_API_KEY }}
