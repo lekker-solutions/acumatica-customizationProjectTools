@@ -55,7 +55,7 @@ namespace AcuPackageTools
                     foreach (var directory in Directory.GetDirectories(customizationPath))
                     {
                         if (directory.EndsWith(@"\_project")) continue;
-                        await AddAssetsToPackage(archive, directory, customizationPath, customizationNode);
+                        AddAssetsToPackage(archive, directory, customizationPath, customizationNode);
                     }
 
                     projectXml.AppendChild(customizationNode);

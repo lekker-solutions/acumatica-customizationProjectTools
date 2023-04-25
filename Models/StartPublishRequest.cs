@@ -7,6 +7,8 @@
 // ----------------------------------------------------------------------------------
 #endregion
 
+using System.Collections.Generic;
+
 namespace AcuPackageTools.Models
 {
     public class StartPublishRequest

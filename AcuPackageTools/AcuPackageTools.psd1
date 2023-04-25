@@ -9,7 +9,7 @@
 @{
 
 # Script module or binary module file associated with this manifest.
-RootModule = 'bin\Release\AcuPackageTools.dll'
+RootModule = '.\bin\Release\netstandard2.0\AcuPackageTools.dll'
 
 # Version number of this module.
 ModuleVersion = '0.1'

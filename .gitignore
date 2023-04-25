@@ -3,5 +3,5 @@
 
 
 # Output
-/bin/*
-/obj/*
+*/bin/*
+*/obj/*

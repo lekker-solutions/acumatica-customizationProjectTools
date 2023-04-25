@@ -17,4 +17,4 @@ jobs:
     - name: Build module in Release mode
       run: dotnet build acumatica-customizationProjectTools.sln -c Release
     - name: Publish to PowerShell Gallery
-      run: Publish-Module -Path . -NuGetApiKey ${{ secrets.NUGET_API_KEY }}
+      run: Publish-Module -Path AcuPackageTools.psd1 -NuGetApiKey ${{ secrets.NUGET_API_KEY }}
