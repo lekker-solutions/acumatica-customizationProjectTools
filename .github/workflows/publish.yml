@@ -16,5 +16,7 @@ jobs:
       run: dotnet restore acumatica-customizationProjectTools.sln
     - name: Build module in Release mode
       run: dotnet build acumatica-customizationProjectTools.sln -c Release
+    - name: Test Module before Publish
+      run: Test-ModuleManifest -Path .\AcuPackageTools\AcuPackageTools.psd1
     - name: Publish to PowerShell Gallery
-      run: Publish-Module -Path AcuPackageTools.psd1 -NuGetApiKey ${{ secrets.NUGET_API_KEY }}
+      run: Publish-Module -Path AcuPackageTools.psd1 -NuGetApiKey ${{ secrets.POWERSHELL_GALLERY_API_KEY }}
