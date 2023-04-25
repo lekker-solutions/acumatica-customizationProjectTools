@@ -1,4 +1,6 @@
-﻿using System.Management.Automation;
+﻿using System;
+using System.Management.Automation;
+using System.Text.RegularExpressions;
 
 namespace AcuPackageTools
 {
@@ -20,6 +22,13 @@ namespace AcuPackageTools
         public string PackageFileName { get; set; }
 
         [Parameter(
+            Mandatory = true,
+            ValueFromPipeline = true,
+            ValueFromPipelineByPropertyName = true)]
+        [Alias("l")]
+        public string ProductVersion { get; set; }
+
+        [Parameter(
             Mandatory = false,
             ValueFromPipeline = true,
             ValueFromPipelineByPropertyName = true)]
@@ -38,9 +47,26 @@ namespace AcuPackageTools
         {
             WriteVerbose(string.Empty);
             WriteVerbose($"Building Package {PackageFileName}");
-            PackageBuilder.BuildCustomizationPackage(CustomizationPath, PackageFileName, Description, Level, "20.202");
+
+            if (!CheckProductVersion()) return;
+
+            PackageBuilder.BuildCustomizationPackage(CustomizationPath, PackageFileName, Description, Level, ProductVersion);
             WriteVerbose($"Package {PackageFileName} Completed Build");
             WriteVerbose(string.Empty);
+        }
+
+        private bool CheckProductVersion()
+        {
+            var productVersionRegex = Regex.Match(ProductVersion, @"^\d+\.\d+$");
+            if (!productVersionRegex.Success)
+            {
+                WriteError(new ErrorRecord(
+                    new Exception($"Product Version {ProductVersion} does not match expected pattern ##.###"), "",
+                    ErrorCategory.InvalidArgument, ProductVersion));
+                return false;
+            }
+
+            return true;
         }
     }
 }
