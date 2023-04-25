@@ -4,6 +4,7 @@ using AcuPackageTools.CmdletBase;
 
 namespace AcuPackageTools
 {
+    [Cmdlet(VerbsLifecycle.Invoke, "ApiPackagePublish")]
     public class Invoke_ApiPackagePublishCmdlet : ApiCmdlet
     {
         public override void PerformApiOperations()

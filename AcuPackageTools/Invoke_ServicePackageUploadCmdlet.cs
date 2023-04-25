@@ -20,8 +20,8 @@ namespace AcuPackageTools
             Mandatory = true,
             ValueFromPipeline = true,
             ValueFromPipelineByPropertyName = true)]
-        [Alias("pfn")]
-        public string PackageFileName { get; set; }
+        [Alias("pp")]
+        public string PackagePath { get; set; }
 
         [Parameter(
             Mandatory = false,
@@ -32,10 +32,23 @@ namespace AcuPackageTools
 
         protected override void ProcessRecord()
         {
+            var packagePath = ValidatePackagePath();
+
             var client = GetClient();
             client.LoginAsync(new LoginRequest(Username, Password));
-            client.UploadPackageAsync(new UploadPackageRequest(PackageName, File.ReadAllBytes(PackageFileName), ReplacePackage));
+            client.UploadPackageAsync(new UploadPackageRequest(PackageName, File.ReadAllBytes(packagePath), ReplacePackage));
             client.LogoutAsync(new LogoutRequest());
+        }
+
+        private string ValidatePackagePath()
+        {
+            var packagePath = !Path.IsPathRooted(PackagePath)
+                ? Path.Combine(PackagePath, this.MyInvocation.PSScriptRoot)
+                : PackagePath;
+
+            if (!File.Exists(packagePath))
+                throw new InvalidOperationException("File does not exist at " + packagePath);
+            return packagePath;
         }
 
         protected override void EndProcessing()

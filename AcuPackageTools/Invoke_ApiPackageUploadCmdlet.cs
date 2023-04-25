@@ -9,16 +9,10 @@ using AcuPackageTools.Models;
 
 namespace AcuPackageTools
 {
+    [Cmdlet(VerbsLifecycle.Invoke, "ApiPackageUpload")]
     public class Invoke_ApiPackageUploadCmdlet : ApiCmdlet
     {
         public const string ImportEndpoint = "/CustomizationApi/import";
-
-        [Parameter(
-            Mandatory = true,
-            ValueFromPipeline = true,
-            ValueFromPipelineByPropertyName = true)]
-        [Alias("p")]
-        public string PackagePath { get; set; }
 
         [Parameter(
             Mandatory = true,
@@ -28,18 +22,25 @@ namespace AcuPackageTools
         public string PackageName { get; set; }
 
         [Parameter(
-            Mandatory = false,
+            Mandatory = true,
             ValueFromPipeline = true,
             ValueFromPipelineByPropertyName = true)]
-        [Alias("d")]
-        public string PackageDescr { get; set; }
+        [Alias("pp")]
+        public string PackagePath { get; set; }
 
         [Parameter(
             Mandatory = false,
             ValueFromPipeline = true,
             ValueFromPipelineByPropertyName = true)]
         [Alias("r")]
-        public SwitchParameter ReplaceIfExists { get; set; }
+        public SwitchParameter ReplacePackage { get; set; }
+
+        [Parameter(
+            Mandatory = false,
+            ValueFromPipeline = true,
+            ValueFromPipelineByPropertyName = true)]
+        [Alias("d")]
+        public string PackageDescr { get; set; }
 
         [Parameter(
             Mandatory = false,
@@ -61,7 +62,7 @@ namespace AcuPackageTools
             binData.Dispose();
             var request = 
                 new ImportPackageRequest(Level,
-                    ReplaceIfExists,
+                    ReplacePackage,
                     PackageName, PackageDescr,
                 Convert.ToBase64String(binDataMemoryStream.ToArray()));
             var response = Client.PostAsync(new Uri(BaseUrl, ImportEndpoint), new StringContent(JsonSerializer.Serialize(request, new JsonSerializerOptions()

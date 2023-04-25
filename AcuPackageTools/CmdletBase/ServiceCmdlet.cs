@@ -13,7 +13,6 @@ namespace AcuPackageTools.CmdletBase
             Mandatory = false,
             ValueFromPipeline = true,
             ValueFromPipelineByPropertyName = true)]
-        [Alias("url")]
         public string Url { get; set; }
 
         [Parameter(
