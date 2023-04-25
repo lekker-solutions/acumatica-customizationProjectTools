@@ -4,7 +4,7 @@ Acumatica Customization Project Tools
 =======
 Powershell Cmdlets for Managing Acumatica customization packages. 
 
-Extracted out of Gabriel Michauds AcumaticaCIDemo so that it may be used in a public Powershell Module. Many thanks for taking the time to investigate how to build a customization package without starting up the website.
+Extracted out of Gabriel Michauds [AcumaticaCIDemo](https://github.com/VelixoSolutions/AcumaticaCIDemo/) so that it may be used in a public Powershell Module. Many thanks for taking the time to investigate how to build a customization package without starting up the website.
 
 # Cmdlets
 
