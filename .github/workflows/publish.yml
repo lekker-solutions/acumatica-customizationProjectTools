@@ -13,8 +13,8 @@ jobs:
       with:
         dotnet-version: '2.2.x'
     - name: Restore dependencies
-      run: dotnet restore
+      run: dotnet restore acumatica-customizationProjectTools.sln
     - name: Build module in Release mode
-      run: dotnet build -c Release
+      run: dotnet build acumatica-customizationProjectTools.sln -c Release
     - name: Publish to PowerShell Gallery
       run: Publish-Module -Path . -NuGetApiKey ${{ secrets.NUGET_API_KEY }}
