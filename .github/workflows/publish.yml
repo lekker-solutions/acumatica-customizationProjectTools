@@ -8,7 +8,13 @@ jobs:
     runs-on: windows-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Install PowerShell Gallery module
-      run: Install-Module -Name PowerShellGet -Force
-    - name: Publish module to PowerShell Gallery
-      run: Publish-Module -Path . -NuGetApiKey ${{ secrets.POWERSHELL_GALLERY_API_KEY }} -Verbose
+    - name: Set up .NET Standard 2.0
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: '2.2.x'
+    - name: Restore dependencies
+      run: dotnet restore
+    - name: Build module in Release mode
+      run: dotnet build -c Release
+    - name: Publish to PowerShell Gallery
+      run: Publish-Module -Path . -NuGetApiKey ${{ secrets.NUGET_API_KEY }}
