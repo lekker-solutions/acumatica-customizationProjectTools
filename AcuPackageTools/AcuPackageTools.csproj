@@ -20,7 +20,4 @@
   <ItemGroup>
     <Folder Include="Models\" />
   </ItemGroup>
-	<Target Name="AfterBuild">
-		<Copy SourceFiles="$(TargetDir)\$(AssemblyName).dll" DestinationFolder="$(SolutionDir)\output" />
-	</Target>
 </Project>
