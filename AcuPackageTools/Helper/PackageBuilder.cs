@@ -14,18 +14,18 @@ using System.IO;
 using System.IO.Compression;
 using System.Xml;
 
-namespace AcuPackageTools
+namespace AcuPackageTools.Helper
 {
     public class PackageBuilder
     {
         public static void BuildCustomizationPackage(string customizationPath,
                                                           string packageFilename,
                                                           string description,
-                                                          int    level,
+                                                          int level,
                                                           string productVersion)
         {
             // Our poor man's version of PX.CommandLine.exe -- to keep things simple.
-            var projectXml        = new XmlDocument();
+            var projectXml = new XmlDocument();
             var customizationNode = projectXml.CreateElement("Customization");
 
             customizationNode.SetAttribute("level", level.ToString());

@@ -3,6 +3,7 @@ using AcuPackageTools.CmdletBase;
 using System;
 using System.IO;
 using System.Management.Automation;
+using System.Net;
 
 namespace AcuPackageTools
 {
@@ -30,21 +31,11 @@ namespace AcuPackageTools
         [Alias("r")]
         public SwitchParameter ReplacePackage { get; set; }
 
-        protected override void ProcessRecord()
+        internal override void PerformOperations(ServiceGateSoap client)
         {
             var packagePath = ValidatePackagePath();
-
-            try
-            {
-                var client = GetClient();
-                client.LoginAsync(new LoginRequest(Username, Password));
-                client.UploadPackageAsync(new UploadPackageRequest(PackageName, File.ReadAllBytes(packagePath), ReplacePackage));
-                client.LogoutAsync(new LogoutRequest());
-            }
-            catch (Exception e)
-            {
-                WriteError(new ErrorRecord(e, string.Empty, ErrorCategory.OperationStopped, default));
-            }
+            client.UploadPackage(new UploadPackageRequest(PackageName, File.ReadAllBytes(packagePath),
+                ReplacePackage));
         }
 
         private string ValidatePackagePath()
@@ -56,11 +47,6 @@ namespace AcuPackageTools
             if (!File.Exists(packagePath))
                 throw new InvalidOperationException("File does not exist at " + packagePath);
             return packagePath;
-        }
-
-        protected override void EndProcessing()
-        {
-            WriteVerbose("End!");
         }
     }
 }

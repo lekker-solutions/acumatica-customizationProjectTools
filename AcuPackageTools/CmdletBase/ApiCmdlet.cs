@@ -3,7 +3,9 @@ using System;
 using System.Management.Automation;
 using System.Net;
 using System.Net.Http;
+using System.Net.Mime;
 using System.ServiceModel;
+using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -13,23 +15,23 @@ namespace AcuPackageTools.CmdletBase
     {
         protected HttpClient Client;
         private bool _disposed;
-        protected Uri BaseUrl => new Uri(Url);
+        private bool _loggedIn;
 
         [Parameter(
-            Mandatory = false,
+            Mandatory = true,
             ValueFromPipeline = true,
             ValueFromPipelineByPropertyName = true)]
         public string Url { get; set; }
 
         [Parameter(
-            Mandatory = false,
+            Mandatory = true,
             ValueFromPipeline = true,
             ValueFromPipelineByPropertyName = true)]
         [Alias("u")]
         public string Username { get; set; }
 
         [Parameter(
-            Mandatory = false,
+            Mandatory = true,
             ValueFromPipeline = true,
             ValueFromPipelineByPropertyName = true)]
         [Alias("p")]
@@ -69,32 +71,74 @@ namespace AcuPackageTools.CmdletBase
             }
         }
 
-        public abstract void PerformApiOperations();
+        protected abstract void PerformApiOperations();
 
         protected override void StopProcessing()
         {
             DisposeClient();
         }
 
-        protected void Login()
+        private void Login()
         {
             var loginRequest = new AcuPackageTools.Models.LoginRequest(Username, Password, Tenant);
-
-            Client.PostAsync(new Uri(BaseUrl, "entuty/auth/login"), new StringContent(JsonSerializer.Serialize(loginRequest, new JsonSerializerOptions()
-            {
-                DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingDefault
-            })));
+            SendRequest("/entity/auth/login",loginRequest);
+            _loggedIn = true;
         }
 
-        protected void Logout()
+        protected JsonDocument SendRequest(string resource, object body = null)
         {
-            Client.PostAsync(new Uri(BaseUrl, "entity/auth/logout"),new StringContent(string.Empty));
+            var uriBuilder = new UriBuilder(Url);
+            uriBuilder.Path += resource;
+            string url = uriBuilder.ToString();
+            HttpResponseMessage response;
+            if (body is null)
+            {
+                response = Client.PostAsync(url, new StringContent(string.Empty, Encoding.UTF8, "application/json")).GetAwaiter().GetResult();
+                WriteVerbose($"Posting Empty Body to " + url);
+            }
+            else
+            {
+                string requestContent = JsonSerializer.Serialize(body, new JsonSerializerOptions()
+                {
+                    DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingDefault,
+                    WriteIndented = true
+                });
+                response = Client.PostAsync(url, new StringContent(requestContent, Encoding.UTF8, "application/json")).GetAwaiter().GetResult();
+                WriteVerbose($"Posting content to " + url);
+                WriteVerbose(requestContent);
+            }
+
+            string responseContent = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
+            var jDoc = string.IsNullOrWhiteSpace(responseContent) ? default : JsonDocument.Parse(responseContent);
+            if (!response.IsSuccessStatusCode 
+                && !string.IsNullOrWhiteSpace(responseContent))
+            {
+                throw new HttpListenerException((int)response.StatusCode,
+                    $"There was a failure when calling {url}: "
+                    + Environment.NewLine
+                    + JsonSerializer.Serialize(jDoc, new JsonSerializerOptions { WriteIndented = true }));
+            }
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new HttpListenerException((int)response.StatusCode,
+                    $"There was a failure when calling {url}");
+            }
+
+            WriteVerbose(JsonSerializer.Serialize(jDoc, new JsonSerializerOptions { WriteIndented = true }));
+
+            return jDoc;
         }
 
-        protected void DisposeClient()
+        private void Logout()
+        {
+            if (!_loggedIn) return;
+            SendRequest( "/entity/auth/logout");
+        }
+
+        private void DisposeClient()
         {
             if (_disposed) return;
-            Client.Dispose();
+            Client?.Dispose();
             _disposed = true;
         }
     }

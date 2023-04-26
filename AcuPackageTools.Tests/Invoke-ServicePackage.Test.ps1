@@ -1,4 +1,4 @@
-Describe "Invoke-ServicePackageUpload"{
+Describe "Invoke-ServicePackage"{
     BeforeAll {
         $modulePath = Join-Path $PSScriptRoot "..\AcuPackageTools\AcuPackageTools.psd1" 
         Import-Module -Name $modulePath
@@ -9,8 +9,20 @@ Describe "Invoke-ServicePackageUpload"{
         $packagePath = Join-Path $PSScriptRoot ".\TestResources\TestPackage.zip"
     }
 
-    Context "Upload Package Thru ServiceGate"{
+    Context "Upload Package"{
         It "Should import the package succesfully"{
+            Invoke-ServicePackageUpload -u $username -p $password -url $url -pn $packageName -pp $packagePath
+        }
+    }
+
+    Context "Publish Package"{
+        It "Should publish the package succesfully"{
+            Invoke-ServicePackageUpload -u $username -p $password -url $url -pn $packageName -pp $packagePath
+        }
+    }
+
+    Context "Unpublish All"{
+        It "Should unpublish all packages succesfully"{
             Invoke-ServicePackageUpload -u $username -p $password -url $url -pn $packageName -pp $packagePath
         }
     }

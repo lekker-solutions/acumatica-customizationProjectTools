@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Management.Automation;
 using System.Text.RegularExpressions;
+using AcuPackageTools.Helper;
 
 namespace AcuPackageTools
 {
     [Cmdlet(VerbsLifecycle.Invoke, "PackageBuild")]
-    public class PackageBuildCmdlet : PSCmdlet
+    public class Invoke_PackageBuildCmdlet : PSCmdlet
     {
         [Parameter(
             Mandatory = true,
@@ -25,7 +26,7 @@ namespace AcuPackageTools
             Mandatory = true,
             ValueFromPipeline = true,
             ValueFromPipelineByPropertyName = true)]
-        [Alias("pv")]
+        [Alias("v")]
         public string ProductVersion { get; set; }
 
         [Parameter(

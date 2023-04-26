@@ -49,7 +49,7 @@ namespace AcuPackageTools
         [Alias("lvl")]
         public int? Level { get; set; }
 
-        public override void PerformApiOperations()
+        protected override void PerformApiOperations()
         {
             if (!File.Exists(PackagePath))
             {
@@ -65,13 +65,9 @@ namespace AcuPackageTools
                     ReplacePackage,
                     PackageName, PackageDescr,
                 Convert.ToBase64String(binDataMemoryStream.ToArray()));
-            var response = Client.PostAsync(new Uri(BaseUrl, ImportEndpoint), new StringContent(JsonSerializer.Serialize(request, new JsonSerializerOptions()
-            {
-                DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingDefault
-            })));
 
-            var responseObject =
-                JsonSerializer.Deserialize<ApiResponseRoot>(response.Result.Content.ReadAsStreamAsync().GetAwaiter().GetResult());
+            using var response = SendRequest(ImportEndpoint, request);
+            var responseObject = response.Deserialize<ApiResponseRoot>();
 
             foreach (var log in responseObject.Log)    
             {

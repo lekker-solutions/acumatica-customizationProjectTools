@@ -4,10 +4,9 @@ using System.Text.Json.Serialization;
 
 namespace AcuPackageTools.Models;
 
-public record ApiResponseRoot(IReadOnlyList<Log> Log
-)
+public record ApiResponseRoot(List<Log> Log)
 {
-    [JsonPropertyName("log")] public IReadOnlyList<Log> Log { get; } = Log;
+    [JsonPropertyName("log")] public List<Log> Log { get; } = Log;
 }
 
 public record Log(

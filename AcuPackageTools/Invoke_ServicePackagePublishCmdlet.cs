@@ -18,30 +18,15 @@ namespace AcuPackageTools
         public string[] PackageNames { get; set; }
 
         [Parameter(
-            Mandatory = true,
-            ValueFromPipeline = true,
-            ValueFromPipelineByPropertyName = true)]
-        [Alias("pfn")]
-        public string PackageFileName { get; set; }
-
-        [Parameter(
             Mandatory = false,
             ValueFromPipeline = true,
             ValueFromPipelineByPropertyName = true)]
-        [Alias("r")]
+        [Alias("m")]
         public SwitchParameter MergeWithExisting { get; set; }
 
-        protected override void ProcessRecord()
+        internal override void PerformOperations(ServiceGateSoap client)
         {
-            var client = GetClient();
-            client.Login(new LoginRequest(Username, Password));
             client.PublishPackages(new PublishPackagesRequest(PackageNames, MergeWithExisting));
-            client.Logout(new LogoutRequest());
-        }
-
-        protected override void EndProcessing()
-        {
-            WriteVerbose("End!");
         }
     }
 }

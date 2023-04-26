@@ -19,8 +19,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "actions", "actions", "{1956
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{E2C2296D-31BF-43AA-8C37-843E62639911}"
 	ProjectSection(SolutionItems) = preProject
-		AcuPackageTools.Tests\Invoke-ApiPackageUpload.Test.ps1 = AcuPackageTools.Tests\Invoke-ApiPackageUpload.Test.ps1
-		AcuPackageTools.Tests\Invoke-ServicePackageUpload.Test.ps1 = AcuPackageTools.Tests\Invoke-ServicePackageUpload.Test.ps1
+		AcuPackageTools.Tests\Invoke-ApiPackage.Test.ps1 = AcuPackageTools.Tests\Invoke-ApiPackage.Test.ps1
+		AcuPackageTools.Tests\Invoke-PackageBuild.Test.ps1 = AcuPackageTools.Tests\Invoke-PackageBuild.Test.ps1
+		AcuPackageTools.Tests\Invoke-ServicePackage.Test.ps1 = AcuPackageTools.Tests\Invoke-ServicePackage.Test.ps1
 	EndProjectSection
 EndProject
 Global
