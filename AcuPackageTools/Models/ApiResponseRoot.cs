@@ -10,13 +10,13 @@ public record ApiResponseRoot(List<Log> Log)
 }
 
 public record Log(
-    DateTime? Timestamp,
+    DateTime Timestamp,
     string LogType,
     string Message
 )
 {
     [JsonPropertyName("timestamp")]
-    public DateTime? Timestamp { get; } = Timestamp;
+    public DateTime Timestamp { get; } = Timestamp;
 
     [JsonPropertyName("logType")]
     public string LogType { get; } = LogType;
