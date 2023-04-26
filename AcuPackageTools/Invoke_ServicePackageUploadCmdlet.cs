@@ -34,10 +34,17 @@ namespace AcuPackageTools
         {
             var packagePath = ValidatePackagePath();
 
-            var client = GetClient();
-            client.LoginAsync(new LoginRequest(Username, Password));
-            client.UploadPackageAsync(new UploadPackageRequest(PackageName, File.ReadAllBytes(packagePath), ReplacePackage));
-            client.LogoutAsync(new LogoutRequest());
+            try
+            {
+                var client = GetClient();
+                client.LoginAsync(new LoginRequest(Username, Password));
+                client.UploadPackageAsync(new UploadPackageRequest(PackageName, File.ReadAllBytes(packagePath), ReplacePackage));
+                client.LogoutAsync(new LogoutRequest());
+            }
+            catch (Exception e)
+            {
+                WriteError(new ErrorRecord(e, string.Empty, ErrorCategory.OperationStopped, default));
+            }
         }
 
         private string ValidatePackagePath()
