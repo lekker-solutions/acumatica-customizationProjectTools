@@ -20,7 +20,7 @@ jobs:
 
     - name: Import Built Module
       run: |
-        $modulePath = Join-Path $PSScriptRoot "..\AcuPackageTools\AcuPackageTools.psd1" 
+        $modulePath = Join-Path $PSScriptRoot ".\AcuPackageTools\AcuPackageTools.psd1" 
         Import-Module -Name $modulePath
 
     - name: Test Api Cmdlets
