@@ -12,6 +12,18 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "info", "info", "{8B098785-9
 		README.md = README.md
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "actions", "actions", "{1956547E-C3AB-4595-BF5D-3090ABE76DD4}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\publish.yml = .github\workflows\publish.yml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{E2C2296D-31BF-43AA-8C37-843E62639911}"
+	ProjectSection(SolutionItems) = preProject
+		AcuPackageTools.Tests\Invoke-ApiPackage.Test.ps1 = AcuPackageTools.Tests\Invoke-ApiPackage.Test.ps1
+		AcuPackageTools.Tests\Invoke-PackageBuild.Test.ps1 = AcuPackageTools.Tests\Invoke-PackageBuild.Test.ps1
+		AcuPackageTools.Tests\Invoke-ServicePackage.Test.ps1 = AcuPackageTools.Tests\Invoke-ServicePackage.Test.ps1
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,6 +37,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{1956547E-C3AB-4595-BF5D-3090ABE76DD4} = {8B098785-917D-417F-837E-1316AFD81AC1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D3181DA9-D8B4-4D20-A2BC-15C50E8FEC98}

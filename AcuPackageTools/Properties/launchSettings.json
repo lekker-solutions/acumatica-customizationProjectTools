@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "Default": {
+      "commandName": "Executable",
+      "executablePath": "C:\\Program Files\\PowerShell\\7\\pwsh.exe",
+      "commandLineArgs": "-NoExit -Command \"& Import-Module -Name .\\bin\\Debug\\netstandard2.0\\AcuPackageTools.dll -Verbose;",
+      "workingDirectory": "D:\\Repos\\acumatica-customizationProjectTools\\AcuPackageTools"
+    }
+  }
+}

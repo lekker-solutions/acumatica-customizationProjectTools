@@ -1,9 +1,12 @@
-﻿using System.Management.Automation;
+﻿using System;
+using System.Management.Automation;
+using System.Text.RegularExpressions;
+using AcuPackageTools.Helper;
 
 namespace AcuPackageTools
 {
     [Cmdlet(VerbsLifecycle.Invoke, "PackageBuild")]
-    public class PackageBuildCmdlet : PSCmdlet
+    public class Invoke_PackageBuildCmdlet : PSCmdlet
     {
         [Parameter(
             Mandatory = true,
@@ -18,6 +21,13 @@ namespace AcuPackageTools
             ValueFromPipelineByPropertyName = true)]
         [Alias("pfn")]
         public string PackageFileName { get; set; }
+
+        [Parameter(
+            Mandatory = true,
+            ValueFromPipeline = true,
+            ValueFromPipelineByPropertyName = true)]
+        [Alias("v")]
+        public string ProductVersion { get; set; }
 
         [Parameter(
             Mandatory = false,
@@ -38,9 +48,26 @@ namespace AcuPackageTools
         {
             WriteVerbose(string.Empty);
             WriteVerbose($"Building Package {PackageFileName}");
-            PackageBuilder.BuildCustomizationPackage(CustomizationPath, PackageFileName, Description, Level, "20.202");
+
+            if (!CheckProductVersion()) return;
+
+            PackageBuilder.BuildCustomizationPackage(CustomizationPath, PackageFileName, Description, Level, ProductVersion);
             WriteVerbose($"Package {PackageFileName} Completed Build");
             WriteVerbose(string.Empty);
+        }
+
+        private bool CheckProductVersion()
+        {
+            var productVersionRegex = Regex.Match(ProductVersion, @"^\d+\.\d+$");
+            if (!productVersionRegex.Success)
+            {
+                WriteError(new ErrorRecord(
+                    new Exception($"Product Version {ProductVersion} does not match expected pattern ##.###"), "",
+                    ErrorCategory.InvalidArgument, ProductVersion));
+                return false;
+            }
+
+            return true;
         }
     }
 }
