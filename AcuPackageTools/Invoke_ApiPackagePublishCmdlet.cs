@@ -76,9 +76,11 @@ namespace AcuPackageTools
 
             PublishEndResponse responseData;
             HashSet<DateTime> existingTimeStamps = new();
+            bool isCompleted = false;
+            bool isFailed = false;
             do
             {
-                using var endResponse = SendRequest(PublishEndEndpoint);
+                var endResponse = SendRequest(PublishEndEndpoint);
                 responseData =
                     startResponse.Deserialize<PublishEndResponse>();
 
@@ -98,7 +100,14 @@ namespace AcuPackageTools
                     existingTimeStamps.Add(log.Timestamp);
                 }
                 Thread.Sleep(1000);
-            } while (!responseData.IsCompleted && !responseData.IsFailed);
+
+                // For some reason this will NOT DESERALIZE :((((((
+                JsonElement value;
+                endResponse.RootElement.TryGetProperty("isCompleted", out value);
+                isCompleted = value.GetBoolean();
+                endResponse.RootElement.TryGetProperty("isFailed", out value);
+                isFailed = value.GetBoolean();
+            } while (!isCompleted && !isFailed);
         }
     }
 }

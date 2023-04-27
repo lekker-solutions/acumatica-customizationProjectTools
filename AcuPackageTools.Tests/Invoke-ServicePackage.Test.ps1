@@ -1,7 +1,11 @@
 Describe "Invoke-ServicePackage"{
     BeforeAll {
         $modulePath = Join-Path $PSScriptRoot "..\AcuPackageTools\AcuPackageTools.psd1" 
-        Import-Module -Name $modulePath
+        if(!(Get-Module -ListAvailable -Name $modulePath -ErrorAction SilentlyContinue))
+        {
+            Import-Module -Name $modulePath
+        }
+
         $url = "https://localhost/23R1"
         $username = "admin"
         $password = "123456"
@@ -11,20 +15,20 @@ Describe "Invoke-ServicePackage"{
 
     Context "Upload Package"{
         It "Should import the package succesfully"{
-            Invoke-ServicePackageUpload -u $username -p $password -url $url -pn $packageName -pp $packagePath
-        }
+            {Invoke-ServicePackageUpload -u $username -p $password -url $url -pn $packageName -pp $packagePath -r } | Should -Not -Throw
+        } 
     }
 
     Context "Publish Package"{
         It "Should publish the package succesfully"{
-            Invoke-ServicePackageUpload -u $username -p $password -url $url -pn $packageName -pp $packagePath
-        }
+            {Invoke-ServicePackagePublish -u $username -p $password -url $url -pn $packageName -m} | Should -Not -Throw
+        } 
     }
 
     Context "Unpublish All"{
         It "Should unpublish all packages succesfully"{
-            Invoke-ServicePackageUpload -u $username -p $password -url $url -pn $packageName -pp $packagePath
-        }
+            {Invoke-ServicePackageUnpublishAll -u $username -p $password -url $url} | Should -Not -Throw
+        } 
     }
 }
 

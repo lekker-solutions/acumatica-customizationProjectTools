@@ -1,11 +1,11 @@
 Describe "Invoke-PackageBuild"{
     BeforeAll {
         $modulePath = Join-Path $PSScriptRoot "..\AcuPackageTools\AcuPackageTools.psd1" 
-        Import-Module -Name $modulePath
-        $url = "https://localhost/23R1"
-        $username = "admin"
-        $password = "123456"
-        $packageName = "TestPackage"
+        if(!(Get-Module -ListAvailable -Name $modulePath -ErrorAction SilentlyContinue))
+        {
+            Import-Module -Name $modulePath
+        }
+
         $packageFolderPath = Join-Path $PSScriptRoot ".\TestResources\TestPackage"
     }
 
