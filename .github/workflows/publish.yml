@@ -8,10 +8,10 @@ jobs:
     runs-on: windows-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Set up .NET Standard 2.0
+    - name: Setup .NET 6
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: '2.2.x'
+        dotnet-version: 6.0.x-sdk
 
     - name: Restore dependencies
       run: dotnet restore acumatica-customizationProjectTools.sln
