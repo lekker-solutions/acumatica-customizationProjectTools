@@ -40,4 +40,4 @@ jobs:
           NUGET_API_KEY: ${{ secrets.POWERSHELL_GALLERY_API_KEY }}
       run: |
           $version = $env:GITHUB_REF.Replace("refs/tags/", "")
-          Publish-Module -Path .\AcuPackageTools -NuGetApiKey ${{ secrets.POWERSHELL_GALLERY_API_KEY }} -Verbose -RequiredVersion $version
+          Publish-Module -Path .\AcuPackageTools -NuGetApiKey ${{ secrets.POWERSHELL_GALLERY_API_KEY }} -Verbose
