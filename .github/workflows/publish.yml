@@ -2,7 +2,7 @@ name: Publish PowerShell Module
 on:
     push:
         tags:
-          - 'v\d{8}.\d'
+          - 'v*'
 jobs:
   publish:
     runs-on: windows-latest
