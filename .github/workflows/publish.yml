@@ -18,6 +18,11 @@ jobs:
     - name: Install Pester
       run: Install-Module -Name Pester -Force -SkipPublisherCheck
 
+    - name: Import Built Module
+      run: |
+        $modulePath = Join-Path $PSScriptRoot "..\AcuPackageTools\AcuPackageTools.psd1" 
+        Import-Module -Name $modulePath
+
     - name: Test Api Cmdlets
       run: Invoke-Pester -Path .\AcuPackageTools.Tests\Invoke-ApiPackage.Test.ps1
 
