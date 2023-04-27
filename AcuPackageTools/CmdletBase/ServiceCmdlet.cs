@@ -2,7 +2,8 @@
 using System.Management.Automation;
 using System.Net;
 using System.ServiceModel;
-using AcmPackageTools.Service;
+using AcuPackageTools.Models;
+using AcuPackgeTools.CustomizationService;
 
 namespace AcuPackageTools.CmdletBase
 {
@@ -31,7 +32,7 @@ namespace AcuPackageTools.CmdletBase
         [Alias("p")]
         public string Password { get; set; }
 
-        internal abstract void PerformOperations(ServiceGateSoap client);
+        protected abstract void PerformOperations(ServiceGateSoap client);
 
         protected override void BeginProcessing()
         {
@@ -70,17 +71,17 @@ namespace AcuPackageTools.CmdletBase
 
         private void Login(ServiceGateSoap client)
         {
-            var response = client.Login(new LoginRequest(Username, Password));
-            switch (response.LoginResult.Code)
+            var response = client.Login(Username, Password);
+            switch (response.Code)
             {
                 case ErrorCode.OK:
                     break;
                 case ErrorCode.INVALID_CREDENTIALS:
-                    throw new HttpListenerException(403, response.LoginResult.Message);
+                    throw new HttpListenerException(403, response.Message);
                 case ErrorCode.INTERNAL_ERROR:
-                    throw new HttpListenerException(500, response.LoginResult.Message);
+                    throw new HttpListenerException(500, response.Message);
                 case ErrorCode.INVALID_API_VERSION:
-                    throw new HttpListenerException(401, response.LoginResult.Message);
+                    throw new HttpListenerException(401, response.Message);
                 default:
                     throw new ArgumentOutOfRangeException();
             }
@@ -91,7 +92,7 @@ namespace AcuPackageTools.CmdletBase
         private void Logout(ServiceGateSoap client)
         {
             if (!_loggedIn) return;
-            client?.Logout(new LogoutRequest());
+            client?.Logout();
             _loggedIn = false;
         }
 

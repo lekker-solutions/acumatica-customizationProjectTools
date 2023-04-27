@@ -1,11 +1,5 @@
 Describe "Invoke-ServicePackage"{
     BeforeAll {
-        $modulePath = Join-Path $PSScriptRoot "..\AcuPackageTools\AcuPackageTools.psd1" 
-        if(!(Get-Module -ListAvailable -Name $modulePath -ErrorAction SilentlyContinue))
-        {
-            Import-Module -Name $modulePath
-        }
-
         $url = "https://localhost/23R1"
         $username = "admin"
         $password = "123456"

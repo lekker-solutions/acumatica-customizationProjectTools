@@ -1,9 +1,9 @@
-﻿using AcmPackageTools.Service;
+﻿
 using AcuPackageTools.CmdletBase;
 using System;
 using System.IO;
 using System.Management.Automation;
-using System.Net;
+using AcuPackgeTools.CustomizationService;
 
 namespace AcuPackageTools
 {
@@ -31,7 +31,7 @@ namespace AcuPackageTools
         [Alias("r")]
         public SwitchParameter ReplacePackage { get; set; }
 
-        internal override void PerformOperations(ServiceGateSoap client)
+        protected override void PerformOperations(ServiceGateSoap client)
         {
             var packagePath = ValidatePackagePath();
             client.UploadPackage(new UploadPackageRequest(PackageName, File.ReadAllBytes(packagePath),
