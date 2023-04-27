@@ -7,11 +7,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace AcmPackageTools.Service
+namespace AcuPackgeTools.CustomizationService
 {
+    
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
-    [System.ServiceModel.ServiceContractAttribute(Namespace="http://acumatica.com", ConfigurationName="AcmPackageTools.Service.ServiceGateSoap")]
-    internal interface ServiceGateSoap
+    [System.ServiceModel.ServiceContractAttribute(Namespace="http://acumatica.com", ConfigurationName="AcuPackgeTools.CustomizationService.ServiceGateSoap")]
+    public interface ServiceGateSoap
     {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://acumatica.com/Process", ReplyAction="*")]
@@ -19,240 +21,242 @@ namespace AcmPackageTools.Service
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(RowServerStub))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(View[]))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(object[]))]
-        AcmPackageTools.Service.ProcessResponse Process(AcmPackageTools.Service.ProcessRequest request);
+        AcuPackgeTools.CustomizationService.GraphObject Process(AcuPackgeTools.CustomizationService.GraphObject Request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://acumatica.com/Process", ReplyAction="*")]
-        System.Threading.Tasks.Task<AcmPackageTools.Service.ProcessResponse> ProcessAsync(AcmPackageTools.Service.ProcessRequest request);
+        System.Threading.Tasks.Task<AcuPackgeTools.CustomizationService.GraphObject> ProcessAsync(AcuPackgeTools.CustomizationService.GraphObject Request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://acumatica.com/ProcessBatch", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(RowServerStub))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(View[]))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(object[]))]
-        AcmPackageTools.Service.ProcessBatchResponse ProcessBatch(AcmPackageTools.Service.ProcessBatchRequest request);
+        AcuPackgeTools.CustomizationService.GraphObject[] ProcessBatch(AcuPackgeTools.CustomizationService.GraphObject[] requests);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://acumatica.com/ProcessBatch", ReplyAction="*")]
-        System.Threading.Tasks.Task<AcmPackageTools.Service.ProcessBatchResponse> ProcessBatchAsync(AcmPackageTools.Service.ProcessBatchRequest request);
+        System.Threading.Tasks.Task<AcuPackgeTools.CustomizationService.GraphObject[]> ProcessBatchAsync(AcuPackgeTools.CustomizationService.GraphObject[] requests);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://acumatica.com/EnumTables", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(RowServerStub))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(View[]))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(object[]))]
-        AcmPackageTools.Service.EnumTablesResponse EnumTables(AcmPackageTools.Service.EnumTablesRequest request);
+        string[] EnumTables();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://acumatica.com/EnumTables", ReplyAction="*")]
-        System.Threading.Tasks.Task<AcmPackageTools.Service.EnumTablesResponse> EnumTablesAsync(AcmPackageTools.Service.EnumTablesRequest request);
+        System.Threading.Tasks.Task<string[]> EnumTablesAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://acumatica.com/EnumTablesEx", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(RowServerStub))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(View[]))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(object[]))]
-        AcmPackageTools.Service.EnumTablesExResponse EnumTablesEx(AcmPackageTools.Service.EnumTablesExRequest request);
+        string[] EnumTablesEx();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://acumatica.com/EnumTablesEx", ReplyAction="*")]
-        System.Threading.Tasks.Task<AcmPackageTools.Service.EnumTablesExResponse> EnumTablesExAsync(AcmPackageTools.Service.EnumTablesExRequest request);
+        System.Threading.Tasks.Task<string[]> EnumTablesExAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://acumatica.com/EnumGraphs", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(RowServerStub))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(View[]))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(object[]))]
-        AcmPackageTools.Service.EnumGraphsResponse EnumGraphs(AcmPackageTools.Service.EnumGraphsRequest request);
+        string[] EnumGraphs();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://acumatica.com/EnumGraphs", ReplyAction="*")]
-        System.Threading.Tasks.Task<AcmPackageTools.Service.EnumGraphsResponse> EnumGraphsAsync(AcmPackageTools.Service.EnumGraphsRequest request);
+        System.Threading.Tasks.Task<string[]> EnumGraphsAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://acumatica.com/ReportEnumNames", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(RowServerStub))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(View[]))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(object[]))]
-        AcmPackageTools.Service.ReportEnumNamesResponse ReportEnumNames(AcmPackageTools.Service.ReportEnumNamesRequest request);
+        string[] ReportEnumNames();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://acumatica.com/ReportEnumNames", ReplyAction="*")]
-        System.Threading.Tasks.Task<AcmPackageTools.Service.ReportEnumNamesResponse> ReportEnumNamesAsync(AcmPackageTools.Service.ReportEnumNamesRequest request);
+        System.Threading.Tasks.Task<string[]> ReportEnumNamesAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://acumatica.com/ReportEnumTableNames", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(RowServerStub))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(View[]))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(object[]))]
-        AcmPackageTools.Service.ReportEnumTableNamesResponse ReportEnumTableNames(AcmPackageTools.Service.ReportEnumTableNamesRequest request);
+        string[] ReportEnumTableNames(string fullName);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://acumatica.com/ReportEnumTableNames", ReplyAction="*")]
-        System.Threading.Tasks.Task<AcmPackageTools.Service.ReportEnumTableNamesResponse> ReportEnumTableNamesAsync(AcmPackageTools.Service.ReportEnumTableNamesRequest request);
+        System.Threading.Tasks.Task<string[]> ReportEnumTableNamesAsync(string fullName);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://acumatica.com/ReportGetXml", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(RowServerStub))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(View[]))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(object[]))]
-        AcmPackageTools.Service.ReportGetXmlResponse ReportGetXml(AcmPackageTools.Service.ReportGetXmlRequest request);
+        string ReportGetXml(string name);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://acumatica.com/ReportGetXml", ReplyAction="*")]
-        System.Threading.Tasks.Task<AcmPackageTools.Service.ReportGetXmlResponse> ReportGetXmlAsync(AcmPackageTools.Service.ReportGetXmlRequest request);
+        System.Threading.Tasks.Task<string> ReportGetXmlAsync(string name);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://acumatica.com/ReportGetVersionXml", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(RowServerStub))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(View[]))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(object[]))]
-        AcmPackageTools.Service.ReportGetVersionXmlResponse ReportGetVersionXml(AcmPackageTools.Service.ReportGetVersionXmlRequest request);
+        string ReportGetVersionXml(string name, int ver);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://acumatica.com/ReportGetVersionXml", ReplyAction="*")]
-        System.Threading.Tasks.Task<AcmPackageTools.Service.ReportGetVersionXmlResponse> ReportGetVersionXmlAsync(AcmPackageTools.Service.ReportGetVersionXmlRequest request);
+        System.Threading.Tasks.Task<string> ReportGetVersionXmlAsync(string name, int ver);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://acumatica.com/ReportSave", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(RowServerStub))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(View[]))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(object[]))]
-        AcmPackageTools.Service.ReportSaveResponse ReportSave(AcmPackageTools.Service.ReportSaveRequest request);
+        void ReportSave(string name, string xml);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://acumatica.com/ReportSave", ReplyAction="*")]
-        System.Threading.Tasks.Task<AcmPackageTools.Service.ReportSaveResponse> ReportSaveAsync(AcmPackageTools.Service.ReportSaveRequest request);
+        System.Threading.Tasks.Task ReportSaveAsync(string name, string xml);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://acumatica.com/ReportSaveVersionXml", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(RowServerStub))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(View[]))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(object[]))]
-        AcmPackageTools.Service.ReportSaveVersionXmlResponse ReportSaveVersionXml(AcmPackageTools.Service.ReportSaveVersionXmlRequest request);
+        void ReportSaveVersionXml(string name, int ver, string xml);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://acumatica.com/ReportSaveVersionXml", ReplyAction="*")]
-        System.Threading.Tasks.Task<AcmPackageTools.Service.ReportSaveVersionXmlResponse> ReportSaveVersionXmlAsync(AcmPackageTools.Service.ReportSaveVersionXmlRequest request);
+        System.Threading.Tasks.Task ReportSaveVersionXmlAsync(string name, int ver, string xml);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://acumatica.com/ReportSaveEx", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(RowServerStub))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(View[]))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(object[]))]
-        AcmPackageTools.Service.ReportSaveExResponse ReportSaveEx(AcmPackageTools.Service.ReportSaveExRequest request);
+        void ReportSaveEx(string name, string xml, bool createVersion, string versionDescription);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://acumatica.com/ReportSaveEx", ReplyAction="*")]
-        System.Threading.Tasks.Task<AcmPackageTools.Service.ReportSaveExResponse> ReportSaveExAsync(AcmPackageTools.Service.ReportSaveExRequest request);
+        System.Threading.Tasks.Task ReportSaveExAsync(string name, string xml, bool createVersion, string versionDescription);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://acumatica.com/ReportGetPreview", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(RowServerStub))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(View[]))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(object[]))]
-        AcmPackageTools.Service.ReportGetPreviewResponse ReportGetPreview(AcmPackageTools.Service.ReportGetPreviewRequest request);
+        string ReportGetPreview(string xml, int topCount);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://acumatica.com/ReportGetPreview", ReplyAction="*")]
-        System.Threading.Tasks.Task<AcmPackageTools.Service.ReportGetPreviewResponse> ReportGetPreviewAsync(AcmPackageTools.Service.ReportGetPreviewRequest request);
+        System.Threading.Tasks.Task<string> ReportGetPreviewAsync(string xml, int topCount);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://acumatica.com/SetBusinessDate", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(RowServerStub))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(View[]))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(object[]))]
-        AcmPackageTools.Service.SetBusinessDateResponse SetBusinessDate(AcmPackageTools.Service.SetBusinessDateRequest request);
+        void SetBusinessDate(System.DateTime date);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://acumatica.com/SetBusinessDate", ReplyAction="*")]
-        System.Threading.Tasks.Task<AcmPackageTools.Service.SetBusinessDateResponse> SetBusinessDateAsync(AcmPackageTools.Service.SetBusinessDateRequest request);
+        System.Threading.Tasks.Task SetBusinessDateAsync(System.DateTime date);
         
+        // CODEGEN: Parameter 'packageContents' requires additional schema information that cannot be captured using the parameter mode. The specific attribute is 'Microsoft.Xml.Serialization.XmlElementAttribute'.
         [System.ServiceModel.OperationContractAttribute(Action="http://acumatica.com/UploadPackage", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(RowServerStub))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(View[]))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(object[]))]
-        AcmPackageTools.Service.UploadPackageResponse UploadPackage(AcmPackageTools.Service.UploadPackageRequest request);
+        AcuPackgeTools.CustomizationService.UploadPackageResponse UploadPackage(AcuPackgeTools.CustomizationService.UploadPackageRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://acumatica.com/UploadPackage", ReplyAction="*")]
-        System.Threading.Tasks.Task<AcmPackageTools.Service.UploadPackageResponse> UploadPackageAsync(AcmPackageTools.Service.UploadPackageRequest request);
+        System.Threading.Tasks.Task<AcuPackgeTools.CustomizationService.UploadPackageResponse> UploadPackageAsync(AcuPackgeTools.CustomizationService.UploadPackageRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://acumatica.com/PublishPackages", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(RowServerStub))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(View[]))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(object[]))]
-        AcmPackageTools.Service.PublishPackagesResponse PublishPackages(AcmPackageTools.Service.PublishPackagesRequest request);
+        void PublishPackages(string[] packageNames, bool mergeWithExistingPackages);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://acumatica.com/PublishPackages", ReplyAction="*")]
-        System.Threading.Tasks.Task<AcmPackageTools.Service.PublishPackagesResponse> PublishPackagesAsync(AcmPackageTools.Service.PublishPackagesRequest request);
+        System.Threading.Tasks.Task PublishPackagesAsync(string[] packageNames, bool mergeWithExistingPackages);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://acumatica.com/PublishPackagesEx", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(RowServerStub))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(View[]))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(object[]))]
-        AcmPackageTools.Service.PublishPackagesExResponse PublishPackagesEx(AcmPackageTools.Service.PublishPackagesExRequest request);
+        void PublishPackagesEx(string[] packageNames, bool mergeWithExistingPackages, AcuPackgeTools.CustomizationService.PublicationOptions options);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://acumatica.com/PublishPackagesEx", ReplyAction="*")]
-        System.Threading.Tasks.Task<AcmPackageTools.Service.PublishPackagesExResponse> PublishPackagesExAsync(AcmPackageTools.Service.PublishPackagesExRequest request);
+        System.Threading.Tasks.Task PublishPackagesExAsync(string[] packageNames, bool mergeWithExistingPackages, AcuPackgeTools.CustomizationService.PublicationOptions options);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://acumatica.com/CleanupPublish", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(RowServerStub))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(View[]))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(object[]))]
-        AcmPackageTools.Service.CleanupPublishResponse CleanupPublish(AcmPackageTools.Service.CleanupPublishRequest request);
+        void CleanupPublish();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://acumatica.com/CleanupPublish", ReplyAction="*")]
-        System.Threading.Tasks.Task<AcmPackageTools.Service.CleanupPublishResponse> CleanupPublishAsync(AcmPackageTools.Service.CleanupPublishRequest request);
+        System.Threading.Tasks.Task CleanupPublishAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://acumatica.com/UnpublishAllPackages", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(RowServerStub))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(View[]))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(object[]))]
-        AcmPackageTools.Service.UnpublishAllPackagesResponse UnpublishAllPackages(AcmPackageTools.Service.UnpublishAllPackagesRequest request);
+        void UnpublishAllPackages();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://acumatica.com/UnpublishAllPackages", ReplyAction="*")]
-        System.Threading.Tasks.Task<AcmPackageTools.Service.UnpublishAllPackagesResponse> UnpublishAllPackagesAsync(AcmPackageTools.Service.UnpublishAllPackagesRequest request);
+        System.Threading.Tasks.Task UnpublishAllPackagesAsync();
         
+        // CODEGEN: Parameter 'GetPackageResult' requires additional schema information that cannot be captured using the parameter mode. The specific attribute is 'Microsoft.Xml.Serialization.XmlElementAttribute'.
         [System.ServiceModel.OperationContractAttribute(Action="http://acumatica.com/GetPackage", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(RowServerStub))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(View[]))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(object[]))]
-        AcmPackageTools.Service.GetPackageResponse GetPackage(AcmPackageTools.Service.GetPackageRequest request);
+        AcuPackgeTools.CustomizationService.GetPackageResponse GetPackage(AcuPackgeTools.CustomizationService.GetPackageRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://acumatica.com/GetPackage", ReplyAction="*")]
-        System.Threading.Tasks.Task<AcmPackageTools.Service.GetPackageResponse> GetPackageAsync(AcmPackageTools.Service.GetPackageRequest request);
+        System.Threading.Tasks.Task<AcuPackgeTools.CustomizationService.GetPackageResponse> GetPackageAsync(AcuPackgeTools.CustomizationService.GetPackageRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://acumatica.com/LicenseInfo", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(RowServerStub))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(View[]))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(object[]))]
-        AcmPackageTools.Service.LicenseInfoResponse LicenseInfo(AcmPackageTools.Service.LicenseInfoRequest request);
+        AcuPackgeTools.CustomizationService.LicenseDetail LicenseInfo();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://acumatica.com/LicenseInfo", ReplyAction="*")]
-        System.Threading.Tasks.Task<AcmPackageTools.Service.LicenseInfoResponse> LicenseInfoAsync(AcmPackageTools.Service.LicenseInfoRequest request);
+        System.Threading.Tasks.Task<AcuPackgeTools.CustomizationService.LicenseDetail> LicenseInfoAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://acumatica.com/LoginEx", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(RowServerStub))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(View[]))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(object[]))]
-        AcmPackageTools.Service.LoginExResponse LoginEx(AcmPackageTools.Service.LoginExRequest request);
+        AcuPackgeTools.CustomizationService.LoginResult LoginEx(string name, string password, string apiVersion);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://acumatica.com/LoginEx", ReplyAction="*")]
-        System.Threading.Tasks.Task<AcmPackageTools.Service.LoginExResponse> LoginExAsync(AcmPackageTools.Service.LoginExRequest request);
+        System.Threading.Tasks.Task<AcuPackgeTools.CustomizationService.LoginResult> LoginExAsync(string name, string password, string apiVersion);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://acumatica.com/Login", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(RowServerStub))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(View[]))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(object[]))]
-        AcmPackageTools.Service.LoginResponse Login(AcmPackageTools.Service.LoginRequest request);
+        AcuPackgeTools.CustomizationService.LoginResult Login(string name, string password);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://acumatica.com/Login", ReplyAction="*")]
-        System.Threading.Tasks.Task<AcmPackageTools.Service.LoginResponse> LoginAsync(AcmPackageTools.Service.LoginRequest request);
+        System.Threading.Tasks.Task<AcuPackgeTools.CustomizationService.LoginResult> LoginAsync(string name, string password);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://acumatica.com/Logout", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(RowServerStub))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(View[]))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(object[]))]
-        AcmPackageTools.Service.LogoutResponse Logout(AcmPackageTools.Service.LogoutRequest request);
+        void Logout();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://acumatica.com/Logout", ReplyAction="*")]
-        System.Threading.Tasks.Task<AcmPackageTools.Service.LogoutResponse> LogoutAsync(AcmPackageTools.Service.LogoutRequest request);
+        System.Threading.Tasks.Task LogoutAsync();
     }
     
     /// <remarks/>
@@ -1488,508 +1492,9 @@ namespace AcmPackageTools.Service
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="Process", WrapperNamespace="http://acumatica.com", IsWrapped=true)]
-    internal partial class ProcessRequest
-    {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://acumatica.com", Order=0)]
-        public AcmPackageTools.Service.GraphObject Request;
-        
-        public ProcessRequest()
-        {
-        }
-        
-        public ProcessRequest(AcmPackageTools.Service.GraphObject Request)
-        {
-            this.Request = Request;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="ProcessResponse", WrapperNamespace="http://acumatica.com", IsWrapped=true)]
-    internal partial class ProcessResponse
-    {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://acumatica.com", Order=0)]
-        public AcmPackageTools.Service.GraphObject ProcessResult;
-        
-        public ProcessResponse()
-        {
-        }
-        
-        public ProcessResponse(AcmPackageTools.Service.GraphObject ProcessResult)
-        {
-            this.ProcessResult = ProcessResult;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="ProcessBatch", WrapperNamespace="http://acumatica.com", IsWrapped=true)]
-    internal partial class ProcessBatchRequest
-    {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://acumatica.com", Order=0)]
-        public AcmPackageTools.Service.GraphObject[] requests;
-        
-        public ProcessBatchRequest()
-        {
-        }
-        
-        public ProcessBatchRequest(AcmPackageTools.Service.GraphObject[] requests)
-        {
-            this.requests = requests;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="ProcessBatchResponse", WrapperNamespace="http://acumatica.com", IsWrapped=true)]
-    internal partial class ProcessBatchResponse
-    {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://acumatica.com", Order=0)]
-        public AcmPackageTools.Service.GraphObject[] ProcessBatchResult;
-        
-        public ProcessBatchResponse()
-        {
-        }
-        
-        public ProcessBatchResponse(AcmPackageTools.Service.GraphObject[] ProcessBatchResult)
-        {
-            this.ProcessBatchResult = ProcessBatchResult;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="EnumTables", WrapperNamespace="http://acumatica.com", IsWrapped=true)]
-    internal partial class EnumTablesRequest
-    {
-        
-        public EnumTablesRequest()
-        {
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="EnumTablesResponse", WrapperNamespace="http://acumatica.com", IsWrapped=true)]
-    internal partial class EnumTablesResponse
-    {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://acumatica.com", Order=0)]
-        public string[] EnumTablesResult;
-        
-        public EnumTablesResponse()
-        {
-        }
-        
-        public EnumTablesResponse(string[] EnumTablesResult)
-        {
-            this.EnumTablesResult = EnumTablesResult;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="EnumTablesEx", WrapperNamespace="http://acumatica.com", IsWrapped=true)]
-    internal partial class EnumTablesExRequest
-    {
-        
-        public EnumTablesExRequest()
-        {
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="EnumTablesExResponse", WrapperNamespace="http://acumatica.com", IsWrapped=true)]
-    internal partial class EnumTablesExResponse
-    {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://acumatica.com", Order=0)]
-        public string[] EnumTablesExResult;
-        
-        public EnumTablesExResponse()
-        {
-        }
-        
-        public EnumTablesExResponse(string[] EnumTablesExResult)
-        {
-            this.EnumTablesExResult = EnumTablesExResult;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="EnumGraphs", WrapperNamespace="http://acumatica.com", IsWrapped=true)]
-    internal partial class EnumGraphsRequest
-    {
-        
-        public EnumGraphsRequest()
-        {
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="EnumGraphsResponse", WrapperNamespace="http://acumatica.com", IsWrapped=true)]
-    internal partial class EnumGraphsResponse
-    {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://acumatica.com", Order=0)]
-        public string[] EnumGraphsResult;
-        
-        public EnumGraphsResponse()
-        {
-        }
-        
-        public EnumGraphsResponse(string[] EnumGraphsResult)
-        {
-            this.EnumGraphsResult = EnumGraphsResult;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="ReportEnumNames", WrapperNamespace="http://acumatica.com", IsWrapped=true)]
-    internal partial class ReportEnumNamesRequest
-    {
-        
-        public ReportEnumNamesRequest()
-        {
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="ReportEnumNamesResponse", WrapperNamespace="http://acumatica.com", IsWrapped=true)]
-    internal partial class ReportEnumNamesResponse
-    {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://acumatica.com", Order=0)]
-        public string[] ReportEnumNamesResult;
-        
-        public ReportEnumNamesResponse()
-        {
-        }
-        
-        public ReportEnumNamesResponse(string[] ReportEnumNamesResult)
-        {
-            this.ReportEnumNamesResult = ReportEnumNamesResult;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="ReportEnumTableNames", WrapperNamespace="http://acumatica.com", IsWrapped=true)]
-    internal partial class ReportEnumTableNamesRequest
-    {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://acumatica.com", Order=0)]
-        public string fullName;
-        
-        public ReportEnumTableNamesRequest()
-        {
-        }
-        
-        public ReportEnumTableNamesRequest(string fullName)
-        {
-            this.fullName = fullName;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="ReportEnumTableNamesResponse", WrapperNamespace="http://acumatica.com", IsWrapped=true)]
-    internal partial class ReportEnumTableNamesResponse
-    {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://acumatica.com", Order=0)]
-        public string[] ReportEnumTableNamesResult;
-        
-        public ReportEnumTableNamesResponse()
-        {
-        }
-        
-        public ReportEnumTableNamesResponse(string[] ReportEnumTableNamesResult)
-        {
-            this.ReportEnumTableNamesResult = ReportEnumTableNamesResult;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="ReportGetXml", WrapperNamespace="http://acumatica.com", IsWrapped=true)]
-    internal partial class ReportGetXmlRequest
-    {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://acumatica.com", Order=0)]
-        public string name;
-        
-        public ReportGetXmlRequest()
-        {
-        }
-        
-        public ReportGetXmlRequest(string name)
-        {
-            this.name = name;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="ReportGetXmlResponse", WrapperNamespace="http://acumatica.com", IsWrapped=true)]
-    internal partial class ReportGetXmlResponse
-    {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://acumatica.com", Order=0)]
-        public string ReportGetXmlResult;
-        
-        public ReportGetXmlResponse()
-        {
-        }
-        
-        public ReportGetXmlResponse(string ReportGetXmlResult)
-        {
-            this.ReportGetXmlResult = ReportGetXmlResult;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="ReportGetVersionXml", WrapperNamespace="http://acumatica.com", IsWrapped=true)]
-    internal partial class ReportGetVersionXmlRequest
-    {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://acumatica.com", Order=0)]
-        public string name;
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://acumatica.com", Order=1)]
-        public int ver;
-        
-        public ReportGetVersionXmlRequest()
-        {
-        }
-        
-        public ReportGetVersionXmlRequest(string name, int ver)
-        {
-            this.name = name;
-            this.ver = ver;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="ReportGetVersionXmlResponse", WrapperNamespace="http://acumatica.com", IsWrapped=true)]
-    internal partial class ReportGetVersionXmlResponse
-    {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://acumatica.com", Order=0)]
-        public string ReportGetVersionXmlResult;
-        
-        public ReportGetVersionXmlResponse()
-        {
-        }
-        
-        public ReportGetVersionXmlResponse(string ReportGetVersionXmlResult)
-        {
-            this.ReportGetVersionXmlResult = ReportGetVersionXmlResult;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="ReportSave", WrapperNamespace="http://acumatica.com", IsWrapped=true)]
-    internal partial class ReportSaveRequest
-    {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://acumatica.com", Order=0)]
-        public string name;
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://acumatica.com", Order=1)]
-        public string xml;
-        
-        public ReportSaveRequest()
-        {
-        }
-        
-        public ReportSaveRequest(string name, string xml)
-        {
-            this.name = name;
-            this.xml = xml;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="ReportSaveResponse", WrapperNamespace="http://acumatica.com", IsWrapped=true)]
-    internal partial class ReportSaveResponse
-    {
-        
-        public ReportSaveResponse()
-        {
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="ReportSaveVersionXml", WrapperNamespace="http://acumatica.com", IsWrapped=true)]
-    internal partial class ReportSaveVersionXmlRequest
-    {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://acumatica.com", Order=0)]
-        public string name;
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://acumatica.com", Order=1)]
-        public int ver;
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://acumatica.com", Order=2)]
-        public string xml;
-        
-        public ReportSaveVersionXmlRequest()
-        {
-        }
-        
-        public ReportSaveVersionXmlRequest(string name, int ver, string xml)
-        {
-            this.name = name;
-            this.ver = ver;
-            this.xml = xml;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="ReportSaveVersionXmlResponse", WrapperNamespace="http://acumatica.com", IsWrapped=true)]
-    internal partial class ReportSaveVersionXmlResponse
-    {
-        
-        public ReportSaveVersionXmlResponse()
-        {
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="ReportSaveEx", WrapperNamespace="http://acumatica.com", IsWrapped=true)]
-    internal partial class ReportSaveExRequest
-    {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://acumatica.com", Order=0)]
-        public string name;
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://acumatica.com", Order=1)]
-        public string xml;
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://acumatica.com", Order=2)]
-        public bool createVersion;
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://acumatica.com", Order=3)]
-        public string versionDescription;
-        
-        public ReportSaveExRequest()
-        {
-        }
-        
-        public ReportSaveExRequest(string name, string xml, bool createVersion, string versionDescription)
-        {
-            this.name = name;
-            this.xml = xml;
-            this.createVersion = createVersion;
-            this.versionDescription = versionDescription;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="ReportSaveExResponse", WrapperNamespace="http://acumatica.com", IsWrapped=true)]
-    internal partial class ReportSaveExResponse
-    {
-        
-        public ReportSaveExResponse()
-        {
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="ReportGetPreview", WrapperNamespace="http://acumatica.com", IsWrapped=true)]
-    internal partial class ReportGetPreviewRequest
-    {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://acumatica.com", Order=0)]
-        public string xml;
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://acumatica.com", Order=1)]
-        public int topCount;
-        
-        public ReportGetPreviewRequest()
-        {
-        }
-        
-        public ReportGetPreviewRequest(string xml, int topCount)
-        {
-            this.xml = xml;
-            this.topCount = topCount;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="ReportGetPreviewResponse", WrapperNamespace="http://acumatica.com", IsWrapped=true)]
-    internal partial class ReportGetPreviewResponse
-    {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://acumatica.com", Order=0)]
-        public string ReportGetPreviewResult;
-        
-        public ReportGetPreviewResponse()
-        {
-        }
-        
-        public ReportGetPreviewResponse(string ReportGetPreviewResult)
-        {
-            this.ReportGetPreviewResult = ReportGetPreviewResult;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="SetBusinessDate", WrapperNamespace="http://acumatica.com", IsWrapped=true)]
-    internal partial class SetBusinessDateRequest
-    {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://acumatica.com", Order=0)]
-        public System.DateTime date;
-        
-        public SetBusinessDateRequest()
-        {
-        }
-        
-        public SetBusinessDateRequest(System.DateTime date)
-        {
-            this.date = date;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="SetBusinessDateResponse", WrapperNamespace="http://acumatica.com", IsWrapped=true)]
-    internal partial class SetBusinessDateResponse
-    {
-        
-        public SetBusinessDateResponse()
-        {
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="UploadPackage", WrapperNamespace="http://acumatica.com", IsWrapped=true)]
-    internal partial class UploadPackageRequest
+    public partial class UploadPackageRequest
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://acumatica.com", Order=0)]
@@ -2016,8 +1521,9 @@ namespace AcmPackageTools.Service
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="UploadPackageResponse", WrapperNamespace="http://acumatica.com", IsWrapped=true)]
-    internal partial class UploadPackageResponse
+    public partial class UploadPackageResponse
     {
         
         public UploadPackageResponse()
@@ -2027,124 +1533,9 @@ namespace AcmPackageTools.Service
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="PublishPackages", WrapperNamespace="http://acumatica.com", IsWrapped=true)]
-    internal partial class PublishPackagesRequest
-    {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://acumatica.com", Order=0)]
-        public string[] packageNames;
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://acumatica.com", Order=1)]
-        public bool mergeWithExistingPackages;
-        
-        public PublishPackagesRequest()
-        {
-        }
-        
-        public PublishPackagesRequest(string[] packageNames, bool mergeWithExistingPackages)
-        {
-            this.packageNames = packageNames;
-            this.mergeWithExistingPackages = mergeWithExistingPackages;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="PublishPackagesResponse", WrapperNamespace="http://acumatica.com", IsWrapped=true)]
-    internal partial class PublishPackagesResponse
-    {
-        
-        public PublishPackagesResponse()
-        {
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="PublishPackagesEx", WrapperNamespace="http://acumatica.com", IsWrapped=true)]
-    internal partial class PublishPackagesExRequest
-    {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://acumatica.com", Order=0)]
-        public string[] packageNames;
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://acumatica.com", Order=1)]
-        public bool mergeWithExistingPackages;
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://acumatica.com", Order=2)]
-        public AcmPackageTools.Service.PublicationOptions options;
-        
-        public PublishPackagesExRequest()
-        {
-        }
-        
-        public PublishPackagesExRequest(string[] packageNames, bool mergeWithExistingPackages, AcmPackageTools.Service.PublicationOptions options)
-        {
-            this.packageNames = packageNames;
-            this.mergeWithExistingPackages = mergeWithExistingPackages;
-            this.options = options;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="PublishPackagesExResponse", WrapperNamespace="http://acumatica.com", IsWrapped=true)]
-    internal partial class PublishPackagesExResponse
-    {
-        
-        public PublishPackagesExResponse()
-        {
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="CleanupPublish", WrapperNamespace="http://acumatica.com", IsWrapped=true)]
-    internal partial class CleanupPublishRequest
-    {
-        
-        public CleanupPublishRequest()
-        {
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="CleanupPublishResponse", WrapperNamespace="http://acumatica.com", IsWrapped=true)]
-    internal partial class CleanupPublishResponse
-    {
-        
-        public CleanupPublishResponse()
-        {
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="UnpublishAllPackages", WrapperNamespace="http://acumatica.com", IsWrapped=true)]
-    internal partial class UnpublishAllPackagesRequest
-    {
-        
-        public UnpublishAllPackagesRequest()
-        {
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="UnpublishAllPackagesResponse", WrapperNamespace="http://acumatica.com", IsWrapped=true)]
-    internal partial class UnpublishAllPackagesResponse
-    {
-        
-        public UnpublishAllPackagesResponse()
-        {
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="GetPackage", WrapperNamespace="http://acumatica.com", IsWrapped=true)]
-    internal partial class GetPackageRequest
+    public partial class GetPackageRequest
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://acumatica.com", Order=0)]
@@ -2162,8 +1553,9 @@ namespace AcmPackageTools.Service
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="GetPackageResponse", WrapperNamespace="http://acumatica.com", IsWrapped=true)]
-    internal partial class GetPackageResponse
+    public partial class GetPackageResponse
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://acumatica.com", Order=0)]
@@ -2180,154 +1572,14 @@ namespace AcmPackageTools.Service
         }
     }
     
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="LicenseInfo", WrapperNamespace="http://acumatica.com", IsWrapped=true)]
-    internal partial class LicenseInfoRequest
-    {
-        
-        public LicenseInfoRequest()
-        {
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="LicenseInfoResponse", WrapperNamespace="http://acumatica.com", IsWrapped=true)]
-    internal partial class LicenseInfoResponse
-    {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://acumatica.com", Order=0)]
-        public AcmPackageTools.Service.LicenseDetail LicenseInfoResult;
-        
-        public LicenseInfoResponse()
-        {
-        }
-        
-        public LicenseInfoResponse(AcmPackageTools.Service.LicenseDetail LicenseInfoResult)
-        {
-            this.LicenseInfoResult = LicenseInfoResult;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="LoginEx", WrapperNamespace="http://acumatica.com", IsWrapped=true)]
-    internal partial class LoginExRequest
-    {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://acumatica.com", Order=0)]
-        public string name;
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://acumatica.com", Order=1)]
-        public string password;
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://acumatica.com", Order=2)]
-        public string apiVersion;
-        
-        public LoginExRequest()
-        {
-        }
-        
-        public LoginExRequest(string name, string password, string apiVersion)
-        {
-            this.name = name;
-            this.password = password;
-            this.apiVersion = apiVersion;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="LoginExResponse", WrapperNamespace="http://acumatica.com", IsWrapped=true)]
-    internal partial class LoginExResponse
-    {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://acumatica.com", Order=0)]
-        public AcmPackageTools.Service.LoginResult LoginExResult;
-        
-        public LoginExResponse()
-        {
-        }
-        
-        public LoginExResponse(AcmPackageTools.Service.LoginResult LoginExResult)
-        {
-            this.LoginExResult = LoginExResult;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="Login", WrapperNamespace="http://acumatica.com", IsWrapped=true)]
-    internal partial class LoginRequest
-    {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://acumatica.com", Order=0)]
-        public string name;
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://acumatica.com", Order=1)]
-        public string password;
-        
-        public LoginRequest()
-        {
-        }
-        
-        public LoginRequest(string name, string password)
-        {
-            this.name = name;
-            this.password = password;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="LoginResponse", WrapperNamespace="http://acumatica.com", IsWrapped=true)]
-    internal partial class LoginResponse
-    {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://acumatica.com", Order=0)]
-        public AcmPackageTools.Service.LoginResult LoginResult;
-        
-        public LoginResponse()
-        {
-        }
-        
-        public LoginResponse(AcmPackageTools.Service.LoginResult LoginResult)
-        {
-            this.LoginResult = LoginResult;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="Logout", WrapperNamespace="http://acumatica.com", IsWrapped=true)]
-    internal partial class LogoutRequest
-    {
-        
-        public LogoutRequest()
-        {
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="LogoutResponse", WrapperNamespace="http://acumatica.com", IsWrapped=true)]
-    internal partial class LogoutResponse
-    {
-        
-        public LogoutResponse()
-        {
-        }
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
-    internal interface ServiceGateSoapChannel : AcmPackageTools.Service.ServiceGateSoap, System.ServiceModel.IClientChannel
+    public interface ServiceGateSoapChannel : AcuPackgeTools.CustomizationService.ServiceGateSoap, System.ServiceModel.IClientChannel
     {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
-    internal partial class ServiceGateSoapClient : System.ServiceModel.ClientBase<AcmPackageTools.Service.ServiceGateSoap>, AcmPackageTools.Service.ServiceGateSoap
+    public partial class ServiceGateSoapClient : System.ServiceModel.ClientBase<AcuPackgeTools.CustomizationService.ServiceGateSoap>, AcuPackgeTools.CustomizationService.ServiceGateSoap
     {
         
         /// <summary>
@@ -2370,244 +1622,281 @@ namespace AcmPackageTools.Service
         {
         }
         
-        public AcmPackageTools.Service.ProcessResponse Process(AcmPackageTools.Service.ProcessRequest request)
+        public AcuPackgeTools.CustomizationService.GraphObject Process(AcuPackgeTools.CustomizationService.GraphObject Request)
         {
-            return base.Channel.Process(request);
+            return base.Channel.Process(Request);
         }
         
-        public System.Threading.Tasks.Task<AcmPackageTools.Service.ProcessResponse> ProcessAsync(AcmPackageTools.Service.ProcessRequest request)
+        public System.Threading.Tasks.Task<AcuPackgeTools.CustomizationService.GraphObject> ProcessAsync(AcuPackgeTools.CustomizationService.GraphObject Request)
         {
-            return base.Channel.ProcessAsync(request);
+            return base.Channel.ProcessAsync(Request);
         }
         
-        public AcmPackageTools.Service.ProcessBatchResponse ProcessBatch(AcmPackageTools.Service.ProcessBatchRequest request)
+        public AcuPackgeTools.CustomizationService.GraphObject[] ProcessBatch(AcuPackgeTools.CustomizationService.GraphObject[] requests)
         {
-            return base.Channel.ProcessBatch(request);
+            return base.Channel.ProcessBatch(requests);
         }
         
-        public System.Threading.Tasks.Task<AcmPackageTools.Service.ProcessBatchResponse> ProcessBatchAsync(AcmPackageTools.Service.ProcessBatchRequest request)
+        public System.Threading.Tasks.Task<AcuPackgeTools.CustomizationService.GraphObject[]> ProcessBatchAsync(AcuPackgeTools.CustomizationService.GraphObject[] requests)
         {
-            return base.Channel.ProcessBatchAsync(request);
+            return base.Channel.ProcessBatchAsync(requests);
         }
         
-        public AcmPackageTools.Service.EnumTablesResponse EnumTables(AcmPackageTools.Service.EnumTablesRequest request)
+        public string[] EnumTables()
         {
-            return base.Channel.EnumTables(request);
+            return base.Channel.EnumTables();
         }
         
-        public System.Threading.Tasks.Task<AcmPackageTools.Service.EnumTablesResponse> EnumTablesAsync(AcmPackageTools.Service.EnumTablesRequest request)
+        public System.Threading.Tasks.Task<string[]> EnumTablesAsync()
         {
-            return base.Channel.EnumTablesAsync(request);
+            return base.Channel.EnumTablesAsync();
         }
         
-        public AcmPackageTools.Service.EnumTablesExResponse EnumTablesEx(AcmPackageTools.Service.EnumTablesExRequest request)
+        public string[] EnumTablesEx()
         {
-            return base.Channel.EnumTablesEx(request);
+            return base.Channel.EnumTablesEx();
         }
         
-        public System.Threading.Tasks.Task<AcmPackageTools.Service.EnumTablesExResponse> EnumTablesExAsync(AcmPackageTools.Service.EnumTablesExRequest request)
+        public System.Threading.Tasks.Task<string[]> EnumTablesExAsync()
         {
-            return base.Channel.EnumTablesExAsync(request);
+            return base.Channel.EnumTablesExAsync();
         }
         
-        public AcmPackageTools.Service.EnumGraphsResponse EnumGraphs(AcmPackageTools.Service.EnumGraphsRequest request)
+        public string[] EnumGraphs()
         {
-            return base.Channel.EnumGraphs(request);
+            return base.Channel.EnumGraphs();
         }
         
-        public System.Threading.Tasks.Task<AcmPackageTools.Service.EnumGraphsResponse> EnumGraphsAsync(AcmPackageTools.Service.EnumGraphsRequest request)
+        public System.Threading.Tasks.Task<string[]> EnumGraphsAsync()
         {
-            return base.Channel.EnumGraphsAsync(request);
+            return base.Channel.EnumGraphsAsync();
         }
         
-        public AcmPackageTools.Service.ReportEnumNamesResponse ReportEnumNames(AcmPackageTools.Service.ReportEnumNamesRequest request)
+        public string[] ReportEnumNames()
         {
-            return base.Channel.ReportEnumNames(request);
+            return base.Channel.ReportEnumNames();
         }
         
-        public System.Threading.Tasks.Task<AcmPackageTools.Service.ReportEnumNamesResponse> ReportEnumNamesAsync(AcmPackageTools.Service.ReportEnumNamesRequest request)
+        public System.Threading.Tasks.Task<string[]> ReportEnumNamesAsync()
         {
-            return base.Channel.ReportEnumNamesAsync(request);
+            return base.Channel.ReportEnumNamesAsync();
         }
         
-        public AcmPackageTools.Service.ReportEnumTableNamesResponse ReportEnumTableNames(AcmPackageTools.Service.ReportEnumTableNamesRequest request)
+        public string[] ReportEnumTableNames(string fullName)
         {
-            return base.Channel.ReportEnumTableNames(request);
+            return base.Channel.ReportEnumTableNames(fullName);
         }
         
-        public System.Threading.Tasks.Task<AcmPackageTools.Service.ReportEnumTableNamesResponse> ReportEnumTableNamesAsync(AcmPackageTools.Service.ReportEnumTableNamesRequest request)
+        public System.Threading.Tasks.Task<string[]> ReportEnumTableNamesAsync(string fullName)
         {
-            return base.Channel.ReportEnumTableNamesAsync(request);
+            return base.Channel.ReportEnumTableNamesAsync(fullName);
         }
         
-        public AcmPackageTools.Service.ReportGetXmlResponse ReportGetXml(AcmPackageTools.Service.ReportGetXmlRequest request)
+        public string ReportGetXml(string name)
         {
-            return base.Channel.ReportGetXml(request);
+            return base.Channel.ReportGetXml(name);
         }
         
-        public System.Threading.Tasks.Task<AcmPackageTools.Service.ReportGetXmlResponse> ReportGetXmlAsync(AcmPackageTools.Service.ReportGetXmlRequest request)
+        public System.Threading.Tasks.Task<string> ReportGetXmlAsync(string name)
         {
-            return base.Channel.ReportGetXmlAsync(request);
+            return base.Channel.ReportGetXmlAsync(name);
         }
         
-        public AcmPackageTools.Service.ReportGetVersionXmlResponse ReportGetVersionXml(AcmPackageTools.Service.ReportGetVersionXmlRequest request)
+        public string ReportGetVersionXml(string name, int ver)
         {
-            return base.Channel.ReportGetVersionXml(request);
+            return base.Channel.ReportGetVersionXml(name, ver);
         }
         
-        public System.Threading.Tasks.Task<AcmPackageTools.Service.ReportGetVersionXmlResponse> ReportGetVersionXmlAsync(AcmPackageTools.Service.ReportGetVersionXmlRequest request)
+        public System.Threading.Tasks.Task<string> ReportGetVersionXmlAsync(string name, int ver)
         {
-            return base.Channel.ReportGetVersionXmlAsync(request);
+            return base.Channel.ReportGetVersionXmlAsync(name, ver);
         }
         
-        public AcmPackageTools.Service.ReportSaveResponse ReportSave(AcmPackageTools.Service.ReportSaveRequest request)
+        public void ReportSave(string name, string xml)
         {
-            return base.Channel.ReportSave(request);
+            base.Channel.ReportSave(name, xml);
         }
         
-        public System.Threading.Tasks.Task<AcmPackageTools.Service.ReportSaveResponse> ReportSaveAsync(AcmPackageTools.Service.ReportSaveRequest request)
+        public System.Threading.Tasks.Task ReportSaveAsync(string name, string xml)
         {
-            return base.Channel.ReportSaveAsync(request);
+            return base.Channel.ReportSaveAsync(name, xml);
         }
         
-        public AcmPackageTools.Service.ReportSaveVersionXmlResponse ReportSaveVersionXml(AcmPackageTools.Service.ReportSaveVersionXmlRequest request)
+        public void ReportSaveVersionXml(string name, int ver, string xml)
         {
-            return base.Channel.ReportSaveVersionXml(request);
+            base.Channel.ReportSaveVersionXml(name, ver, xml);
         }
         
-        public System.Threading.Tasks.Task<AcmPackageTools.Service.ReportSaveVersionXmlResponse> ReportSaveVersionXmlAsync(AcmPackageTools.Service.ReportSaveVersionXmlRequest request)
+        public System.Threading.Tasks.Task ReportSaveVersionXmlAsync(string name, int ver, string xml)
         {
-            return base.Channel.ReportSaveVersionXmlAsync(request);
+            return base.Channel.ReportSaveVersionXmlAsync(name, ver, xml);
         }
         
-        public AcmPackageTools.Service.ReportSaveExResponse ReportSaveEx(AcmPackageTools.Service.ReportSaveExRequest request)
+        public void ReportSaveEx(string name, string xml, bool createVersion, string versionDescription)
         {
-            return base.Channel.ReportSaveEx(request);
+            base.Channel.ReportSaveEx(name, xml, createVersion, versionDescription);
         }
         
-        public System.Threading.Tasks.Task<AcmPackageTools.Service.ReportSaveExResponse> ReportSaveExAsync(AcmPackageTools.Service.ReportSaveExRequest request)
+        public System.Threading.Tasks.Task ReportSaveExAsync(string name, string xml, bool createVersion, string versionDescription)
         {
-            return base.Channel.ReportSaveExAsync(request);
+            return base.Channel.ReportSaveExAsync(name, xml, createVersion, versionDescription);
         }
         
-        public AcmPackageTools.Service.ReportGetPreviewResponse ReportGetPreview(AcmPackageTools.Service.ReportGetPreviewRequest request)
+        public string ReportGetPreview(string xml, int topCount)
         {
-            return base.Channel.ReportGetPreview(request);
+            return base.Channel.ReportGetPreview(xml, topCount);
         }
         
-        public System.Threading.Tasks.Task<AcmPackageTools.Service.ReportGetPreviewResponse> ReportGetPreviewAsync(AcmPackageTools.Service.ReportGetPreviewRequest request)
+        public System.Threading.Tasks.Task<string> ReportGetPreviewAsync(string xml, int topCount)
         {
-            return base.Channel.ReportGetPreviewAsync(request);
+            return base.Channel.ReportGetPreviewAsync(xml, topCount);
         }
         
-        public AcmPackageTools.Service.SetBusinessDateResponse SetBusinessDate(AcmPackageTools.Service.SetBusinessDateRequest request)
+        public void SetBusinessDate(System.DateTime date)
         {
-            return base.Channel.SetBusinessDate(request);
+            base.Channel.SetBusinessDate(date);
         }
         
-        public System.Threading.Tasks.Task<AcmPackageTools.Service.SetBusinessDateResponse> SetBusinessDateAsync(AcmPackageTools.Service.SetBusinessDateRequest request)
+        public System.Threading.Tasks.Task SetBusinessDateAsync(System.DateTime date)
         {
-            return base.Channel.SetBusinessDateAsync(request);
+            return base.Channel.SetBusinessDateAsync(date);
         }
         
-        public AcmPackageTools.Service.UploadPackageResponse UploadPackage(AcmPackageTools.Service.UploadPackageRequest request)
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        AcuPackgeTools.CustomizationService.UploadPackageResponse AcuPackgeTools.CustomizationService.ServiceGateSoap.UploadPackage(AcuPackgeTools.CustomizationService.UploadPackageRequest request)
         {
             return base.Channel.UploadPackage(request);
         }
         
-        public System.Threading.Tasks.Task<AcmPackageTools.Service.UploadPackageResponse> UploadPackageAsync(AcmPackageTools.Service.UploadPackageRequest request)
+        public void UploadPackage(string packageName, byte[] packageContents, bool replaceIfPackageExists)
+        {
+            AcuPackgeTools.CustomizationService.UploadPackageRequest inValue = new AcuPackgeTools.CustomizationService.UploadPackageRequest();
+            inValue.packageName = packageName;
+            inValue.packageContents = packageContents;
+            inValue.replaceIfPackageExists = replaceIfPackageExists;
+            AcuPackgeTools.CustomizationService.UploadPackageResponse retVal = ((AcuPackgeTools.CustomizationService.ServiceGateSoap)(this)).UploadPackage(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<AcuPackgeTools.CustomizationService.UploadPackageResponse> AcuPackgeTools.CustomizationService.ServiceGateSoap.UploadPackageAsync(AcuPackgeTools.CustomizationService.UploadPackageRequest request)
         {
             return base.Channel.UploadPackageAsync(request);
         }
         
-        public AcmPackageTools.Service.PublishPackagesResponse PublishPackages(AcmPackageTools.Service.PublishPackagesRequest request)
+        public System.Threading.Tasks.Task<AcuPackgeTools.CustomizationService.UploadPackageResponse> UploadPackageAsync(string packageName, byte[] packageContents, bool replaceIfPackageExists)
         {
-            return base.Channel.PublishPackages(request);
+            AcuPackgeTools.CustomizationService.UploadPackageRequest inValue = new AcuPackgeTools.CustomizationService.UploadPackageRequest();
+            inValue.packageName = packageName;
+            inValue.packageContents = packageContents;
+            inValue.replaceIfPackageExists = replaceIfPackageExists;
+            return ((AcuPackgeTools.CustomizationService.ServiceGateSoap)(this)).UploadPackageAsync(inValue);
         }
         
-        public System.Threading.Tasks.Task<AcmPackageTools.Service.PublishPackagesResponse> PublishPackagesAsync(AcmPackageTools.Service.PublishPackagesRequest request)
+        public void PublishPackages(string[] packageNames, bool mergeWithExistingPackages)
         {
-            return base.Channel.PublishPackagesAsync(request);
+            base.Channel.PublishPackages(packageNames, mergeWithExistingPackages);
         }
         
-        public AcmPackageTools.Service.PublishPackagesExResponse PublishPackagesEx(AcmPackageTools.Service.PublishPackagesExRequest request)
+        public System.Threading.Tasks.Task PublishPackagesAsync(string[] packageNames, bool mergeWithExistingPackages)
         {
-            return base.Channel.PublishPackagesEx(request);
+            return base.Channel.PublishPackagesAsync(packageNames, mergeWithExistingPackages);
         }
         
-        public System.Threading.Tasks.Task<AcmPackageTools.Service.PublishPackagesExResponse> PublishPackagesExAsync(AcmPackageTools.Service.PublishPackagesExRequest request)
+        public void PublishPackagesEx(string[] packageNames, bool mergeWithExistingPackages, AcuPackgeTools.CustomizationService.PublicationOptions options)
         {
-            return base.Channel.PublishPackagesExAsync(request);
+            base.Channel.PublishPackagesEx(packageNames, mergeWithExistingPackages, options);
         }
         
-        public AcmPackageTools.Service.CleanupPublishResponse CleanupPublish(AcmPackageTools.Service.CleanupPublishRequest request)
+        public System.Threading.Tasks.Task PublishPackagesExAsync(string[] packageNames, bool mergeWithExistingPackages, AcuPackgeTools.CustomizationService.PublicationOptions options)
         {
-            return base.Channel.CleanupPublish(request);
+            return base.Channel.PublishPackagesExAsync(packageNames, mergeWithExistingPackages, options);
         }
         
-        public System.Threading.Tasks.Task<AcmPackageTools.Service.CleanupPublishResponse> CleanupPublishAsync(AcmPackageTools.Service.CleanupPublishRequest request)
+        public void CleanupPublish()
         {
-            return base.Channel.CleanupPublishAsync(request);
+            base.Channel.CleanupPublish();
         }
         
-        public AcmPackageTools.Service.UnpublishAllPackagesResponse UnpublishAllPackages(AcmPackageTools.Service.UnpublishAllPackagesRequest request)
+        public System.Threading.Tasks.Task CleanupPublishAsync()
         {
-            return base.Channel.UnpublishAllPackages(request);
+            return base.Channel.CleanupPublishAsync();
         }
         
-        public System.Threading.Tasks.Task<AcmPackageTools.Service.UnpublishAllPackagesResponse> UnpublishAllPackagesAsync(AcmPackageTools.Service.UnpublishAllPackagesRequest request)
+        public void UnpublishAllPackages()
         {
-            return base.Channel.UnpublishAllPackagesAsync(request);
+            base.Channel.UnpublishAllPackages();
         }
         
-        public AcmPackageTools.Service.GetPackageResponse GetPackage(AcmPackageTools.Service.GetPackageRequest request)
+        public System.Threading.Tasks.Task UnpublishAllPackagesAsync()
+        {
+            return base.Channel.UnpublishAllPackagesAsync();
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        AcuPackgeTools.CustomizationService.GetPackageResponse AcuPackgeTools.CustomizationService.ServiceGateSoap.GetPackage(AcuPackgeTools.CustomizationService.GetPackageRequest request)
         {
             return base.Channel.GetPackage(request);
         }
         
-        public System.Threading.Tasks.Task<AcmPackageTools.Service.GetPackageResponse> GetPackageAsync(AcmPackageTools.Service.GetPackageRequest request)
+        public byte[] GetPackage(string packageName)
+        {
+            AcuPackgeTools.CustomizationService.GetPackageRequest inValue = new AcuPackgeTools.CustomizationService.GetPackageRequest();
+            inValue.packageName = packageName;
+            AcuPackgeTools.CustomizationService.GetPackageResponse retVal = ((AcuPackgeTools.CustomizationService.ServiceGateSoap)(this)).GetPackage(inValue);
+            return retVal.GetPackageResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<AcuPackgeTools.CustomizationService.GetPackageResponse> AcuPackgeTools.CustomizationService.ServiceGateSoap.GetPackageAsync(AcuPackgeTools.CustomizationService.GetPackageRequest request)
         {
             return base.Channel.GetPackageAsync(request);
         }
         
-        public AcmPackageTools.Service.LicenseInfoResponse LicenseInfo(AcmPackageTools.Service.LicenseInfoRequest request)
+        public System.Threading.Tasks.Task<AcuPackgeTools.CustomizationService.GetPackageResponse> GetPackageAsync(string packageName)
         {
-            return base.Channel.LicenseInfo(request);
+            AcuPackgeTools.CustomizationService.GetPackageRequest inValue = new AcuPackgeTools.CustomizationService.GetPackageRequest();
+            inValue.packageName = packageName;
+            return ((AcuPackgeTools.CustomizationService.ServiceGateSoap)(this)).GetPackageAsync(inValue);
         }
         
-        public System.Threading.Tasks.Task<AcmPackageTools.Service.LicenseInfoResponse> LicenseInfoAsync(AcmPackageTools.Service.LicenseInfoRequest request)
+        public AcuPackgeTools.CustomizationService.LicenseDetail LicenseInfo()
         {
-            return base.Channel.LicenseInfoAsync(request);
+            return base.Channel.LicenseInfo();
         }
         
-        public AcmPackageTools.Service.LoginExResponse LoginEx(AcmPackageTools.Service.LoginExRequest request)
+        public System.Threading.Tasks.Task<AcuPackgeTools.CustomizationService.LicenseDetail> LicenseInfoAsync()
         {
-            return base.Channel.LoginEx(request);
+            return base.Channel.LicenseInfoAsync();
         }
         
-        public System.Threading.Tasks.Task<AcmPackageTools.Service.LoginExResponse> LoginExAsync(AcmPackageTools.Service.LoginExRequest request)
+        public AcuPackgeTools.CustomizationService.LoginResult LoginEx(string name, string password, string apiVersion)
         {
-            return base.Channel.LoginExAsync(request);
+            return base.Channel.LoginEx(name, password, apiVersion);
         }
         
-        public AcmPackageTools.Service.LoginResponse Login(AcmPackageTools.Service.LoginRequest request)
+        public System.Threading.Tasks.Task<AcuPackgeTools.CustomizationService.LoginResult> LoginExAsync(string name, string password, string apiVersion)
         {
-            return base.Channel.Login(request);
+            return base.Channel.LoginExAsync(name, password, apiVersion);
         }
         
-        public System.Threading.Tasks.Task<AcmPackageTools.Service.LoginResponse> LoginAsync(AcmPackageTools.Service.LoginRequest request)
+        public AcuPackgeTools.CustomizationService.LoginResult Login(string name, string password)
         {
-            return base.Channel.LoginAsync(request);
+            return base.Channel.Login(name, password);
         }
         
-        public AcmPackageTools.Service.LogoutResponse Logout(AcmPackageTools.Service.LogoutRequest request)
+        public System.Threading.Tasks.Task<AcuPackgeTools.CustomizationService.LoginResult> LoginAsync(string name, string password)
         {
-            return base.Channel.Logout(request);
+            return base.Channel.LoginAsync(name, password);
         }
         
-        public System.Threading.Tasks.Task<AcmPackageTools.Service.LogoutResponse> LogoutAsync(AcmPackageTools.Service.LogoutRequest request)
+        public void Logout()
         {
-            return base.Channel.LogoutAsync(request);
+            base.Channel.Logout();
+        }
+        
+        public System.Threading.Tasks.Task LogoutAsync()
+        {
+            return base.Channel.LogoutAsync();
         }
         
         public virtual System.Threading.Tasks.Task OpenAsync()

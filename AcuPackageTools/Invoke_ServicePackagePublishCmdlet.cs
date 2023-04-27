@@ -1,9 +1,7 @@
-﻿using System;
+﻿
 using System.Management.Automation;
-using System.ServiceModel.Channels;
-using System.ServiceModel;
-using AcmPackageTools.Service;
 using AcuPackageTools.CmdletBase;
+using AcuPackgeTools.CustomizationService;
 
 namespace AcuPackageTools
 {
@@ -24,9 +22,9 @@ namespace AcuPackageTools
         [Alias("m")]
         public SwitchParameter MergeWithExisting { get; set; }
 
-        internal override void PerformOperations(ServiceGateSoap client)
+        protected override void PerformOperations(ServiceGateSoap client)
         {
-            client.PublishPackages(new PublishPackagesRequest(PackageNames, MergeWithExisting));
+            client.PublishPackages(PackageNames, MergeWithExisting);
         }
     }
 }

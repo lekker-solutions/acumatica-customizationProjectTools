@@ -1,10 +1,8 @@
-﻿using AcmPackageTools.Service;
+﻿
 using System;
 using System.Management.Automation;
 using System.Net;
 using System.Net.Http;
-using System.Net.Mime;
-using System.ServiceModel;
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
