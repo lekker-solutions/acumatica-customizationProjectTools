@@ -6,6 +6,7 @@ using System.Text.Json;
 using System.Threading;
 using AcuPackageTools.CmdletBase;
 using AcuPackageTools.Models;
+using AcuPackageTools.Models.Enum;
 
 namespace AcuPackageTools
 {
@@ -89,12 +90,15 @@ namespace AcuPackageTools
                     if (existingTimeStamps.Contains(log.Timestamp)) continue;
                     switch (log.LogType)
                     {
-                        case "information":
+                        case LogType.Information:
+                        case LogType.Trace:
                             WriteInformation(new InformationRecord(log.Message, "Customization API"));
                             break;
-                        case "error":
+                        case LogType.Warning:
                             WriteWarning(log.Message);
                             break;
+                        case LogType.Error:
+                            throw new HttpListenerException(500, log.Message);
                     }
 
                     existingTimeStamps.Add(log.Timestamp);
