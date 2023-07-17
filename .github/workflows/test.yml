@@ -1,0 +1,40 @@
+name: Test PowerShell Module
+on:
+    push:
+        tags:
+          - '*'
+jobs:
+  publish:
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Restore dependencies
+      run: dotnet restore acumatica-customizationProjectTools.sln
+
+    - name: Build module in Release mode
+      run: dotnet build acumatica-customizationProjectTools.sln -c Release
+
+    - name: Test Module Manifest
+      run: Test-ModuleManifest -Path .\AcuPackageTools\AcuPackageTools.psd1
+
+    - name: Install Pester
+      run: Install-Module -Name Pester -Force -SkipPublisherCheck
+
+    - name: Import Built Module
+      run: |
+        $modulePath = Join-Path $PSScriptRoot ".\AcuPackageTools\AcuPackageTools.psd1" 
+        Import-Module -Name $modulePath
+
+    - name: Test Api Cmdlets
+      run: Invoke-Pester -Path .\AcuPackageTools.Tests\Invoke-ApiPackage.Test.ps1
+
+    - name: Test Service Cmdlets
+      run: Invoke-Pester -Path .\AcuPackageTools.Tests\Invoke-ServicePackage.Test.ps1
+
+    - name: Test PackageBuild Cmdlets
+      run: Invoke-Pester -Path .\AcuPackageTools.Tests\Invoke-PackageBuild.Test.ps1
+
+    - name: Test Module Manifest
+      run: Test-ModuleManifest -Path .\AcuPackageTools\AcuPackageTools.psd1
+
