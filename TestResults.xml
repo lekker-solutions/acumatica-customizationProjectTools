@@ -1,0 +1,110 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<test-results xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="nunit_schema_2.5.xsd" name="Pester" total="7" errors="0" failures="7" not-run="0" inconclusive="0" ignored="0" skipped="0" invalid="0" date="2025-03-16" time="19:01:36">
+  <environment user="KyleVanderstoep" nunit-version="2.5.8.0" os-version="10.0.26100" user-domain="AzureAD" clr-version="9.0.1" machine-name="BATUMI" platform="Microsoft Windows 11 Pro|C:\windows|\Device\Harddisk0\Partition1" cwd="D:\Repos\acumatica-customizationProjectTools" />
+  <culture-info current-culture="en-US" current-uiculture="en-US" />
+  <test-suite type="TestFixture" name="Pester" executed="True" result="Failure" success="False" time="0.9597" asserts="0" description="Pester">
+    <results>
+      <test-suite type="TestFixture" name="D:\Repos\acumatica-customizationProjectTools\AcuPackageTools.Tests\Invoke-ApiPackage.24_1.Tests.ps1" executed="True" result="Failure" success="False" time="0.6385" asserts="0" description="D:\Repos\acumatica-customizationProjectTools\AcuPackageTools.Tests\Invoke-ApiPackage.24_1.Tests.ps1">
+        <results>
+          <test-suite type="TestFixture" name="Invoke-ApiPackage" executed="True" result="Failure" success="False" time="0.2756" asserts="0" description="Invoke-ApiPackage">
+            <results>
+              <test-suite type="TestFixture" name="Invoke-ApiPackage.Upload Package" executed="True" result="Failure" success="False" time="0.1341" asserts="0" description="Invoke-ApiPackage.Upload Package">
+                <results>
+                  <test-case description="Should import the package succesfully" name="Invoke-ApiPackage.Upload Package.Should import the package succesfully" time="0.1079" asserts="0" success="False" result="Failure" executed="True">
+                    <failure>
+                      <message>CommandNotFoundException: The term 'Invoke-ApiPackageUpload' is not recognized as a name of a cmdlet, function, script file, or executable program.
+Check the spelling of the name, or if a path was included, verify that the path is correct and try again.</message>
+                      <stack-trace>at &lt;ScriptBlock&gt;, D:\Repos\acumatica-customizationProjectTools\AcuPackageTools.Tests\Invoke-ApiPackage.24_1.Tests.ps1:12</stack-trace>
+                    </failure>
+                  </test-case>
+                </results>
+              </test-suite>
+              <test-suite type="TestFixture" name="Invoke-ApiPackage.Publish Package" executed="True" result="Failure" success="False" time="0.1874" asserts="0" description="Invoke-ApiPackage.Publish Package">
+                <results>
+                  <test-case description="Should publish the package succesfully" name="Invoke-ApiPackage.Publish Package.Should publish the package succesfully" time="0.0463" asserts="0" success="False" result="Failure" executed="True">
+                    <failure>
+                      <message>CommandNotFoundException: The term 'Invoke-ApiPackagePublish' is not recognized as a name of a cmdlet, function, script file, or executable program.
+Check the spelling of the name, or if a path was included, verify that the path is correct and try again.</message>
+                      <stack-trace>at &lt;ScriptBlock&gt;, D:\Repos\acumatica-customizationProjectTools\AcuPackageTools.Tests\Invoke-ApiPackage.24_1.Tests.ps1:18</stack-trace>
+                    </failure>
+                  </test-case>
+                </results>
+              </test-suite>
+              <test-suite type="TestFixture" name="Invoke-ApiPackage.Unpublish All" executed="True" result="Failure" success="False" time="0.2607" asserts="0" description="Invoke-ApiPackage.Unpublish All">
+                <results>
+                  <test-case description="Should unpublish all packages succesfully" name="Invoke-ApiPackage.Unpublish All.Should unpublish all packages succesfully" time="0.0651" asserts="0" success="False" result="Failure" executed="True">
+                    <failure>
+                      <message>CommandNotFoundException: The term 'Invoke-ApiPackageUnpublishAll' is not recognized as a name of a cmdlet, function, script file, or executable program.
+Check the spelling of the name, or if a path was included, verify that the path is correct and try again.</message>
+                      <stack-trace>at &lt;ScriptBlock&gt;, D:\Repos\acumatica-customizationProjectTools\AcuPackageTools.Tests\Invoke-ApiPackage.24_1.Tests.ps1:24</stack-trace>
+                    </failure>
+                  </test-case>
+                </results>
+              </test-suite>
+            </results>
+          </test-suite>
+        </results>
+      </test-suite>
+      <test-suite type="TestFixture" name="D:\Repos\acumatica-customizationProjectTools\AcuPackageTools.Tests\Invoke-ApiPackage.24_2.Tests.ps1" executed="True" result="Failure" success="False" time="0.2232" asserts="0" description="D:\Repos\acumatica-customizationProjectTools\AcuPackageTools.Tests\Invoke-ApiPackage.24_2.Tests.ps1">
+        <results>
+          <test-suite type="TestFixture" name="Invoke-ApiPackage" executed="True" result="Failure" success="False" time="0.1811" asserts="0" description="Invoke-ApiPackage">
+            <results>
+              <test-suite type="TestFixture" name="Invoke-ApiPackage.Upload Package" executed="True" result="Failure" success="False" time="0.0532" asserts="0" description="Invoke-ApiPackage.Upload Package">
+                <results>
+                  <test-case description="Should import the package succesfully" name="Invoke-ApiPackage.Upload Package.Should import the package succesfully" time="0.0462" asserts="0" success="False" result="Failure" executed="True">
+                    <failure>
+                      <message>CommandNotFoundException: The term 'Invoke-ApiPackageUpload' is not recognized as a name of a cmdlet, function, script file, or executable program.
+Check the spelling of the name, or if a path was included, verify that the path is correct and try again.</message>
+                      <stack-trace>at &lt;ScriptBlock&gt;, D:\Repos\acumatica-customizationProjectTools\AcuPackageTools.Tests\Invoke-ApiPackage.24_2.Tests.ps1:12</stack-trace>
+                    </failure>
+                  </test-case>
+                </results>
+              </test-suite>
+              <test-suite type="TestFixture" name="Invoke-ApiPackage.Publish Package" executed="True" result="Failure" success="False" time="0.1233" asserts="0" description="Invoke-ApiPackage.Publish Package">
+                <results>
+                  <test-case description="Should publish the package succesfully" name="Invoke-ApiPackage.Publish Package.Should publish the package succesfully" time="0.0637" asserts="0" success="False" result="Failure" executed="True">
+                    <failure>
+                      <message>CommandNotFoundException: The term 'Invoke-ApiPackagePublish' is not recognized as a name of a cmdlet, function, script file, or executable program.
+Check the spelling of the name, or if a path was included, verify that the path is correct and try again.</message>
+                      <stack-trace>at &lt;ScriptBlock&gt;, D:\Repos\acumatica-customizationProjectTools\AcuPackageTools.Tests\Invoke-ApiPackage.24_2.Tests.ps1:18</stack-trace>
+                    </failure>
+                  </test-case>
+                </results>
+              </test-suite>
+              <test-suite type="TestFixture" name="Invoke-ApiPackage.Unpublish All" executed="True" result="Failure" success="False" time="0.174" asserts="0" description="Invoke-ApiPackage.Unpublish All">
+                <results>
+                  <test-case description="Should unpublish all packages succesfully" name="Invoke-ApiPackage.Unpublish All.Should unpublish all packages succesfully" time="0.0444" asserts="0" success="False" result="Failure" executed="True">
+                    <failure>
+                      <message>CommandNotFoundException: The term 'Invoke-ApiPackageUnpublishAll' is not recognized as a name of a cmdlet, function, script file, or executable program.
+Check the spelling of the name, or if a path was included, verify that the path is correct and try again.</message>
+                      <stack-trace>at &lt;ScriptBlock&gt;, D:\Repos\acumatica-customizationProjectTools\AcuPackageTools.Tests\Invoke-ApiPackage.24_2.Tests.ps1:24</stack-trace>
+                    </failure>
+                  </test-case>
+                </results>
+              </test-suite>
+            </results>
+          </test-suite>
+        </results>
+      </test-suite>
+      <test-suite type="TestFixture" name="D:\Repos\acumatica-customizationProjectTools\AcuPackageTools.Tests\Invoke-PackageBuild.Tests.ps1" executed="True" result="Failure" success="False" time="0.098" asserts="0" description="D:\Repos\acumatica-customizationProjectTools\AcuPackageTools.Tests\Invoke-PackageBuild.Tests.ps1">
+        <results>
+          <test-suite type="TestFixture" name="Invoke-PackageBuild" executed="True" result="Failure" success="False" time="0.0581" asserts="0" description="Invoke-PackageBuild">
+            <results>
+              <test-suite type="TestFixture" name="Invoke-PackageBuild.Build Package From folder" executed="True" result="Failure" success="False" time="0.0516" asserts="0" description="Invoke-PackageBuild.Build Package From folder">
+                <results>
+                  <test-case description="Should build the package succesfully" name="Invoke-PackageBuild.Build Package From folder.Should build the package succesfully" time="0.0452" asserts="0" success="False" result="Failure" executed="True">
+                    <failure>
+                      <message>CommandNotFoundException: The term 'Invoke-PackageBuild' is not recognized as a name of a cmdlet, function, script file, or executable program.
+Check the spelling of the name, or if a path was included, verify that the path is correct and try again.</message>
+                      <stack-trace>at &lt;ScriptBlock&gt;, D:\Repos\acumatica-customizationProjectTools\AcuPackageTools.Tests\Invoke-PackageBuild.Tests.ps1:8</stack-trace>
+                    </failure>
+                  </test-case>
+                </results>
+              </test-suite>
+            </results>
+          </test-suite>
+        </results>
+      </test-suite>
+    </results>
+  </test-suite>
+</test-results>

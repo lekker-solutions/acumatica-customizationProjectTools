@@ -15,6 +15,34 @@ jobs:
     - name: Build module in Release mode
       run: dotnet build acumatica-customizationProjectTools.sln -c Release
 
+    - name: Install Pester
+      shell: pwsh
+      run: |
+        Install-Module -Name Pester -Force -SkipPublisherCheck
+
+    - name: Run Pester Tests
+      shell: pwsh
+      run: |
+        $testResults = Invoke-Pester -Path .\AcuPackageTools.Tests -PassThru -OutputFormat NUnitXml -OutputFile TestResults.xml
+        if ($testResults.FailedCount -gt 0) {
+          Write-Error "Failed $($testResults.FailedCount) tests"
+          exit 1
+        }
+
+    - name: Upload Test Results
+      uses: actions/upload-artifact@v3
+      if: always()
+      with:
+        name: test-results
+        path: TestResults.xml
+
+    - name: Update Module Version from Tag
+      shell: pwsh
+      run: |
+        $tag = $env:GITHUB_REF -replace 'refs/tags/', ''
+        Write-Host "GitHub Tag: $tag"
+        .\.github\Update-ModuleVersion.ps1 -GitHubTag $tag
+
     - name: Test Module Manifest before Publish
       run: Test-ModuleManifest -Path .\AcuPackageTools\AcuPackageTools.psd1
 
@@ -22,5 +50,4 @@ jobs:
       env:
           NUGET_API_KEY: ${{ secrets.POWERSHELL_GALLERY_API_KEY }}
       run: |
-          $version = ${{ github.ref }}
           Publish-Module -Path .\AcuPackageTools -NuGetApiKey ${{ secrets.POWERSHELL_GALLERY_API_KEY }} -Verbose

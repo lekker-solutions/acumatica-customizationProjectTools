@@ -8,6 +8,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "info", "info", "{8B098785-917D-417F-837E-1316AFD81AC1}"
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
+		initRepo.ps1 = initRepo.ps1
 		LICENSE = LICENSE
 		README.md = README.md
 	EndProjectSection
@@ -19,9 +20,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "actions", "actions", "{1956
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{E2C2296D-31BF-43AA-8C37-843E62639911}"
 	ProjectSection(SolutionItems) = preProject
-		AcuPackageTools.Tests\Invoke-ApiPackage.Test.ps1 = AcuPackageTools.Tests\Invoke-ApiPackage.Test.ps1
-		AcuPackageTools.Tests\Invoke-PackageBuild.Test.ps1 = AcuPackageTools.Tests\Invoke-PackageBuild.Test.ps1
-		AcuPackageTools.Tests\Invoke-ServicePackage.Test.ps1 = AcuPackageTools.Tests\Invoke-ServicePackage.Test.ps1
+		AcuPackageTools.Tests\Invoke-ApiPackage.24_1.Tests.ps1 = AcuPackageTools.Tests\Invoke-ApiPackage.24_1.Tests.ps1
+		AcuPackageTools.Tests\Invoke-ApiPackage.24_2.Tests.ps1 = AcuPackageTools.Tests\Invoke-ApiPackage.24_2.Tests.ps1
+		AcuPackageTools.Tests\Invoke-PackageBuild.Tests.ps1 = AcuPackageTools.Tests\Invoke-PackageBuild.Tests.ps1
 	EndProjectSection
 EndProject
 Global

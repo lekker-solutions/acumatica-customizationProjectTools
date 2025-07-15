@@ -1,6 +1,6 @@
 Describe "Invoke-ApiPackage"{
     BeforeAll {
-        $url = "https://localhost/23R1"
+        $url = "https://localhost/PackageToolsTest_24_2"
         $username = "admin"
         $password = "123456"
         $packageName = "TestPackage"

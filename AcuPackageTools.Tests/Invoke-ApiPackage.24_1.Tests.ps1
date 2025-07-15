@@ -1,6 +1,6 @@
-Describe "Invoke-ServicePackage"{
+Describe "Invoke-ApiPackage"{
     BeforeAll {
-        $url = "https://localhost/23R1"
+        $url = "https://localhost/PackageToolsTest_24_1"
         $username = "admin"
         $password = "123456"
         $packageName = "TestPackage"
@@ -9,20 +9,20 @@ Describe "Invoke-ServicePackage"{
 
     Context "Upload Package"{
         It "Should import the package succesfully"{
-            {Invoke-ServicePackageUpload -u $username -p $password -url $url -pn $packageName -pp $packagePath -r } | Should -Not -Throw
-        } 
+            Invoke-ApiPackageUpload -u $username -p $password -url $url -pn $packageName -pp $packagePath -r
+        }
     }
 
     Context "Publish Package"{
         It "Should publish the package succesfully"{
-            {Invoke-ServicePackagePublish -u $username -p $password -url $url -pn $packageName -m} | Should -Not -Throw
-        } 
+            Invoke-ApiPackagePublish -u $username -p $password -url $url -pn $packageName -m -tm Current
+        }
     }
 
     Context "Unpublish All"{
         It "Should unpublish all packages succesfully"{
-            {Invoke-ServicePackageUnpublishAll -u $username -p $password -url $url} | Should -Not -Throw
-        } 
+            Invoke-ApiPackageUnpublishAll -u $username -p $password -url $url -tm Current
+        }
     }
 }
 

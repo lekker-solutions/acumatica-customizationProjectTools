@@ -1,7 +1,6 @@
 # <b>acumatica-customizationProjectTools</b>
 A Powershell 7 Module for Building, Uploading and Publishing Customization Packages to Acumatica ERP. Uses code for building customization packages from the CustomizationProjectTools command line application from Gabriel Michauds excellent [Acumatica CI/CD Demo](https://github.com/VelixoSolutions/AcumaticaCIDemo)
 
-
 ## <u><b>Package Build</b></u>
 
 ### <u>Invoke-PackageBuild</u>
@@ -24,7 +23,7 @@ Wraps a directory saved from an Acumatica ERP instance into a zip that can be up
 Use Invoke-Api... for using the REST API introduced in 22R2, or Invoke-Service... to use the ServiceGate endpoint.
 
 
-### <u>Invoke-{Api/Service}PackageUpload</u>
+### <u>Invoke-ApiPackageUpload</u>
 
 Upload a customization package to an Acumatica ERP Instance. 
 - Parameters
@@ -49,7 +48,7 @@ Upload a customization package to an Acumatica ERP Instance.
 - Example
    - Invoke-ApiPackageUpload -u $username -p $password -url $url -pn $packageName -pp $packagePath -r
 
-### <u>Invoke-{Api/Service}PackagePublish</u>
+### <u>Invoke-ApiPackagePublish</u>
 Publish a number of uploaded packages to an Acuamtica ERP Instance
 - Parameters
     - URL
@@ -73,7 +72,7 @@ Publish a number of uploaded packages to an Acuamtica ERP Instance
 - Example
    - Invoke-ServicePackagePublish -u $username -p $password -url $url -pn $packageName -m
 
-### <u>Invoke-{Api/Service}PackageUnPublishAll</u>
+### <u>Invoke-ApiPackageUnPublishAll</u>
 Unpublish all packages from an Acumatica ERP Instance
 - Parameters
     - URL

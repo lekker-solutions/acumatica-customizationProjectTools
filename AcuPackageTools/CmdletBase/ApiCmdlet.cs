@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Management.Automation;
 using System.Net;
 using System.Net.Http;
@@ -12,8 +11,8 @@ namespace AcuPackageTools.CmdletBase
     public abstract class ApiCmdlet : PSCmdlet
     {
         protected HttpClient Client;
-        private bool _disposed;
-        private bool _loggedIn;
+        private   bool       _disposed;
+        private   bool       _loggedIn;
 
         [Parameter(
             Mandatory = true,
@@ -48,11 +47,12 @@ namespace AcuPackageTools.CmdletBase
             {
                 CookieContainer = new CookieContainer()
             };
-            Client = new HttpClient(handler,true);
+            Client = new HttpClient(handler, true);
         }
 
         protected override void ProcessRecord()
         {
+            var loggedIn = false;
             try
             {
                 Login();
@@ -71,7 +71,7 @@ namespace AcuPackageTools.CmdletBase
 
         protected abstract void PerformApiOperations();
 
-        protected override void StopProcessing()
+        protected override void EndProcessing()
         {
             DisposeClient();
         }
@@ -79,7 +79,7 @@ namespace AcuPackageTools.CmdletBase
         private void Login()
         {
             var loginRequest = new AcuPackageTools.Models.LoginRequest(Username, Password, Tenant);
-            SendRequest("/entity/auth/login",loginRequest);
+            SendRequest("/entity/auth/login", loginRequest);
             _loggedIn = true;
         }
 
@@ -87,35 +87,38 @@ namespace AcuPackageTools.CmdletBase
         {
             var uriBuilder = new UriBuilder(Url);
             uriBuilder.Path += resource;
-            string url = uriBuilder.ToString();
+            var                 url = uriBuilder.ToString();
             HttpResponseMessage response;
             if (body is null)
             {
-                response = Client.PostAsync(url, new StringContent(string.Empty, Encoding.UTF8, "application/json")).GetAwaiter().GetResult();
-                WriteVerbose($"Posting Empty Body to " + url);
+                response = Client.PostAsync(url, new StringContent(string.Empty, Encoding.UTF8, "application/json"))
+                                 .GetAwaiter().GetResult();
+                WriteVerbose("Posting Empty Body to " + url);
             }
             else
             {
-                string requestContent = JsonSerializer.Serialize(body, new JsonSerializerOptions()
+                string requestContent = JsonSerializer.Serialize(body, new JsonSerializerOptions
                 {
                     DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingDefault,
-                    WriteIndented = true
+                    WriteIndented          = true
                 });
-                response = Client.PostAsync(url, new StringContent(requestContent, Encoding.UTF8, "application/json")).GetAwaiter().GetResult();
+                response = Client.PostAsync(url, new StringContent(requestContent, Encoding.UTF8, "application/json"))
+                                 .GetAwaiter().GetResult();
                 WriteVerbose($"Posting content to " + url);
                 WriteVerbose(requestContent);
             }
 
             string responseContent = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
-            var jDoc = string.IsNullOrWhiteSpace(responseContent) ? default : JsonDocument.Parse(responseContent);
-            if (!response.IsSuccessStatusCode 
-                && !string.IsNullOrWhiteSpace(responseContent))
-            {
+            JsonDocument jDoc = string.IsNullOrWhiteSpace(responseContent)
+                ? default
+                : JsonDocument.Parse(responseContent);
+            if (!response.IsSuccessStatusCode
+             && !string.IsNullOrWhiteSpace(responseContent))
                 throw new HttpListenerException((int)response.StatusCode,
                     $"There was a failure when calling {url}: "
-                    + Environment.NewLine
-                    + JsonSerializer.Serialize(jDoc, new JsonSerializerOptions { WriteIndented = true }));
-            }
+                  + Environment.NewLine
+                  + JsonSerializer.Serialize(jDoc, new JsonSerializerOptions { WriteIndented = true }));
+
             if (!response.IsSuccessStatusCode)
             {
                 throw new HttpListenerException((int)response.StatusCode,
@@ -130,7 +133,18 @@ namespace AcuPackageTools.CmdletBase
         private void Logout()
         {
             if (!_loggedIn) return;
-            SendRequest( "/entity/auth/logout");
+            try
+            {
+                SendRequest("/entity/auth/logout");
+            }
+            catch (Exception e)
+            {
+                WriteWarning($"Error during logout: {e.Message}");
+            }
+            finally
+            {
+                _loggedIn = false;
+            }
         }
 
         private void DisposeClient()

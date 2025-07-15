@@ -107,6 +107,10 @@ namespace AcuPackageTools
                 isCompleted = value.GetBoolean();
                 endResponse.RootElement.TryGetProperty("isFailed", out value);
                 isFailed = value.GetBoolean();
+
+                if (isFailed)
+                    WriteError(
+                        new ErrorRecord(new HttpListenerException(500, ""), "", ErrorCategory.ReadError, default));
             } while (!isCompleted && !isFailed);
         }
     }
