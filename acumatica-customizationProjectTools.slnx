@@ -1,0 +1,17 @@
+<Solution>
+  <Folder Name="/info/">
+    <File Path=".gitignore" />
+    <File Path="initRepo.ps1" />
+    <File Path="LICENSE" />
+    <File Path="README.md" />
+  </Folder>
+  <Folder Name="/info/actions/">
+    <File Path=".github/workflows/publish.yml" />
+  </Folder>
+  <Folder Name="/Tests/">
+    <File Path="AcuPackageTools.Tests/Invoke-ApiPackage.24_1.Tests.ps1" />
+    <File Path="AcuPackageTools.Tests/Invoke-ApiPackage.24_2.Tests.ps1" />
+    <File Path="AcuPackageTools.Tests/Invoke-PackageBuild.Tests.ps1" />
+  </Folder>
+  <Project Path="AcuPackageTools/AcuPackageTools.csproj" />
+</Solution>

@@ -2,37 +2,33 @@
 using System.Management.Automation;
 using System.Net;
 using System.Net.Http;
+using System.Security;
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace AcuPackageTools.CmdletBase
 {
-    public abstract class ApiCmdlet : PSCmdlet
+    public abstract class ApiCmdlet : PSCmdlet, IDisposable
     {
         protected HttpClient Client;
-        private   bool       _disposed;
-        private   bool       _loggedIn;
+        private bool _disposed;
+        private bool _loggedIn;
 
         [Parameter(
             Mandatory = true,
             ValueFromPipeline = true,
             ValueFromPipelineByPropertyName = true)]
+        [ValidateNotNullOrEmpty]
         public string Url { get; set; }
 
         [Parameter(
             Mandatory = true,
             ValueFromPipeline = true,
             ValueFromPipelineByPropertyName = true)]
-        [Alias("u")]
-        public string Username { get; set; }
-
-        [Parameter(
-            Mandatory = true,
-            ValueFromPipeline = true,
-            ValueFromPipelineByPropertyName = true)]
-        [Alias("p")]
-        public string Password { get; set; }
+        [Credential]
+        [ValidateNotNull]
+        public PSCredential Credential { get; set; }
 
         [Parameter(
             Mandatory = false,
@@ -52,16 +48,14 @@ namespace AcuPackageTools.CmdletBase
 
         protected override void ProcessRecord()
         {
-            var loggedIn = false;
             try
             {
                 Login();
-
                 PerformApiOperations();
             }
             catch (Exception e)
             {
-                WriteError(new ErrorRecord(e, "", ErrorCategory.ConnectionError, default));
+                WriteError(new ErrorRecord(e, "AcuApiConnectionError", ErrorCategory.ConnectionError, Url));
             }
             finally
             {
@@ -73,12 +67,16 @@ namespace AcuPackageTools.CmdletBase
 
         protected override void EndProcessing()
         {
-            DisposeClient();
+            Dispose();
         }
 
         private void Login()
         {
-            var loginRequest = new AcuPackageTools.Models.LoginRequest(Username, Password, Tenant);
+            var networkCredential = Credential.GetNetworkCredential();
+            var loginRequest = new AcuPackageTools.Models.LoginRequest(
+                networkCredential.UserName,
+                networkCredential.Password,
+                Tenant);
             SendRequest("/entity/auth/login", loginRequest);
             _loggedIn = true;
         }
@@ -147,11 +145,26 @@ namespace AcuPackageTools.CmdletBase
             }
         }
 
-        private void DisposeClient()
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
         {
             if (_disposed) return;
-            Client?.Dispose();
+            if (disposing)
+            {
+                Client?.Dispose();
+            }
             _disposed = true;
+        }
+
+        protected override void StopProcessing()
+        {
+            Dispose();
+            base.StopProcessing();
         }
     }
 }

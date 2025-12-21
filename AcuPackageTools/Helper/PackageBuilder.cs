@@ -19,10 +19,11 @@ namespace AcuPackageTools.Helper
     public class PackageBuilder
     {
         public static void BuildCustomizationPackage(string customizationPath,
-                                                          string packageFilename,
-                                                          string description,
-                                                          int level,
-                                                          string productVersion)
+                                                     string packageFilename,
+                                                     string description,
+                                                     int level,
+                                                     string productVersion,
+                                                     Action<string> writeVerbose = null)
         {
             // Our poor man's version of PX.CommandLine.exe -- to keep things simple.
             var projectXml = new XmlDocument();
@@ -37,7 +38,7 @@ namespace AcuPackageTools.Helper
             {
                 if (file.EndsWith("ProjectMetadata.xml")) continue;
 
-                Console.WriteLine($"Appending {Path.GetFileName(file)} to customization project.xml...");
+                writeVerbose?.Invoke($"Appending {Path.GetFileName(file)} to customization project.xml...");
                 var currentFileXml = new XmlDocument();
                 currentFileXml.Load(file);
 
@@ -55,7 +56,7 @@ namespace AcuPackageTools.Helper
                     foreach (var directory in Directory.GetDirectories(customizationPath))
                     {
                         if (directory.EndsWith(@"\_project")) continue;
-                        AddAssetsToPackage(archive, directory, customizationPath, customizationNode);
+                        AddAssetsToPackage(archive, directory, customizationPath, customizationNode, writeVerbose);
                     }
 
                     projectXml.AppendChild(customizationNode);
@@ -69,14 +70,14 @@ namespace AcuPackageTools.Helper
         }
 
         private static void AddAssetsToPackage(ZipArchive archive, string currentDirectory, string rootDirectory,
-                                               XmlElement customizationElement)
+                                               XmlElement customizationElement, Action<string> writeVerbose = null)
         {
-            Console.WriteLine($"Processing directory {currentDirectory}...");
+            writeVerbose?.Invoke($"Processing directory {currentDirectory}...");
 
             foreach (var file in Directory.GetFiles(currentDirectory))
             {
                 string targetZipFileName = file.Substring(rootDirectory.Length);
-                Console.WriteLine($"Adding {targetZipFileName} to customization project...");
+                writeVerbose?.Invoke($"Adding {targetZipFileName} to customization project...");
 
                 archive.CreateEntryFromFile(file, targetZipFileName, CompressionLevel.Optimal);
 
@@ -88,7 +89,7 @@ namespace AcuPackageTools.Helper
 
             foreach (var directory in Directory.GetDirectories(currentDirectory))
             {
-                AddAssetsToPackage(archive, directory, rootDirectory, customizationElement);
+                AddAssetsToPackage(archive, directory, rootDirectory, customizationElement, writeVerbose);
             }
         }
     }
