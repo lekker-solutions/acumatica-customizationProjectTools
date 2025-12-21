@@ -25,7 +25,7 @@ namespace AcuPackageTools
 
         protected override void PerformApiOperations()
         {
-            if (ShouldProcess(Url, "Unpublish all customization packages"))
+            if (ShouldProcess(EffectiveUrl, "Unpublish all customization packages"))
             {
                 using var response = SendRequest(UnpublishAllEndpoint, new UnpublishAllRequest(TenantMode, TenantLoginNames));
             }

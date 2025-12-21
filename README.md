@@ -14,6 +14,8 @@ Install-Module -Name AcuPackageTools
 
 | Cmdlet | Description |
 |--------|-------------|
+| `Connect-AcuInstance` | Establish a persistent connection to an Acumatica instance |
+| `Disconnect-AcuInstance` | Close the connection to an Acumatica instance |
 | `New-AcuPackage` | Build a customization package ZIP from a directory |
 | `Import-AcuPackage` | Upload a package to an Acumatica instance |
 | `Export-AcuPackage` | Download a package from an Acumatica instance |
@@ -32,7 +34,37 @@ Get-Command -Noun Acu*
 
 ## Authentication
 
-All API cmdlets use `PSCredential` for secure authentication:
+API cmdlets support two modes of authentication:
+
+### Connection Mode (Recommended)
+
+Establish a persistent connection once, then run multiple commands without re-authenticating:
+
+```powershell
+# Connect once
+$cred = Get-Credential
+Connect-AcuInstance -Url "https://acumatica.example.com" -Credential $cred
+
+# Run multiple commands - no need to pass credentials
+Import-AcuPackage -PackageName "MyPackage" -PackagePath ".\MyPackage.zip" -ReplacePackage
+Publish-AcuPackage -ProjectNames @("MyPackage") -TenantMode Current
+Export-AcuPackage -ProjectName "MyPackage" -OutputPath ".\backup.zip"
+
+# Disconnect when done
+Disconnect-AcuInstance
+```
+
+### One-Off Mode
+
+Pass `-Url` and `-Credential` directly to each command (logs in/out per command):
+
+```powershell
+$cred = Get-Credential
+Import-AcuPackage -Url "https://acumatica.example.com" -Credential $cred `
+                  -PackageName "MyPackage" -PackagePath ".\MyPackage.zip"
+```
+
+### Creating Credentials
 
 **Interactive:**
 ```powershell
@@ -52,6 +84,39 @@ Get-Credential | Export-Clixml -Path ".\acumatica-cred.xml"
 
 # Load credentials
 $cred = Import-Clixml -Path ".\acumatica-cred.xml"
+```
+
+---
+
+## Connection Management
+
+### Connect-AcuInstance
+
+Establish a persistent connection to an Acumatica instance. The connection is reused by all subsequent API cmdlets until `Disconnect-AcuInstance` is called.
+
+**Parameters:**
+
+| Parameter | Alias | Type | Required | Description |
+|-----------|-------|------|----------|-------------|
+| Url | | string | Yes | URL of the Acumatica instance |
+| Credential | | PSCredential | Yes | Credentials for authentication |
+| Tenant | -t | string | No | Tenant to authenticate to |
+
+**Example:**
+```powershell
+$cred = Get-Credential
+Connect-AcuInstance -Url "https://acumatica.example.com" -Credential $cred -Tenant "MyCompany"
+```
+
+---
+
+### Disconnect-AcuInstance
+
+Close the connection to the Acumatica instance and clean up resources.
+
+**Example:**
+```powershell
+Disconnect-AcuInstance
 ```
 
 ---
@@ -86,6 +151,8 @@ New-AcuPackage -CustomizationPath ".\MyCustomization" `
 ## Package Management (REST API)
 
 These cmdlets use the Customization REST API introduced in Acumatica 22R2.
+
+> **Note:** When using `Connect-AcuInstance`, the `Url` and `Credential` parameters are optional for all API cmdlets below. If not connected, both parameters are required.
 
 ### Import-AcuPackage
 
@@ -266,29 +333,32 @@ $customizationPath = ".\src\MyCustomization"
 $outputPath = ".\artifacts\$packageName.zip"
 $acumaticaVersion = "24.200"
 
-# Load saved credentials
+# Load saved credentials and connect
 $cred = Import-Clixml -Path ".\acumatica-cred.xml"
+Connect-AcuInstance -Url $acumaticaUrl -Credential $cred
 
-# Build the package
-New-AcuPackage -CustomizationPath $customizationPath `
-               -PackageFileName $outputPath `
-               -ProductVersion $acumaticaVersion `
-               -Description "Build $(Get-Date -Format 'yyyy-MM-dd HH:mm')" `
-               -Level 1
+try {
+    # Build the package (local operation, no connection needed)
+    New-AcuPackage -CustomizationPath $customizationPath `
+                   -PackageFileName $outputPath `
+                   -ProductVersion $acumaticaVersion `
+                   -Description "Build $(Get-Date -Format 'yyyy-MM-dd HH:mm')" `
+                   -Level 1
 
-# Upload to Acumatica
-Import-AcuPackage -Url $acumaticaUrl `
-                  -Credential $cred `
-                  -PackageName $packageName `
-                  -PackagePath $outputPath `
-                  -ReplacePackage
+    # Upload to Acumatica
+    Import-AcuPackage -PackageName $packageName `
+                      -PackagePath $outputPath `
+                      -ReplacePackage
 
-# Publish
-Publish-AcuPackage -Url $acumaticaUrl `
-                   -Credential $cred `
-                   -ProjectNames @($packageName) `
-                   -TenantMode Current `
-                   -MergeWithExisting
+    # Publish
+    Publish-AcuPackage -ProjectNames @($packageName) `
+                       -TenantMode Current `
+                       -MergeWithExisting
+}
+finally {
+    # Always disconnect
+    Disconnect-AcuInstance
+}
 ```
 
 ---

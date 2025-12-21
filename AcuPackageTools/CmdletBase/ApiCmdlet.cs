@@ -1,11 +1,11 @@
-﻿using System;
+using System;
 using System.Management.Automation;
 using System.Net;
 using System.Net.Http;
-using System.Security;
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using AcuPackageTools.Connection;
 
 namespace AcuPackageTools.CmdletBase
 {
@@ -14,20 +14,21 @@ namespace AcuPackageTools.CmdletBase
         protected HttpClient Client;
         private bool _disposed;
         private bool _loggedIn;
+        private bool _useSharedConnection;
+        private string _effectiveUrl;
 
         [Parameter(
-            Mandatory = true,
+            Mandatory = false,
             ValueFromPipeline = true,
             ValueFromPipelineByPropertyName = true)]
         [ValidateNotNullOrEmpty]
         public string Url { get; set; }
 
         [Parameter(
-            Mandatory = true,
+            Mandatory = false,
             ValueFromPipeline = true,
             ValueFromPipelineByPropertyName = true)]
         [Credential]
-        [ValidateNotNull]
         public PSCredential Credential { get; set; }
 
         [Parameter(
@@ -39,27 +40,56 @@ namespace AcuPackageTools.CmdletBase
 
         protected override void BeginProcessing()
         {
-            var handler = new HttpClientHandler()
+            // Determine which mode to use
+            if (Credential != null && !string.IsNullOrEmpty(Url))
             {
-                CookieContainer = new CookieContainer()
-            };
-            Client = new HttpClient(handler, true);
+                // One-off mode: credentials provided explicitly
+                _useSharedConnection = false;
+                _effectiveUrl = Url;
+                var handler = new HttpClientHandler()
+                {
+                    CookieContainer = new CookieContainer()
+                };
+                Client = new HttpClient(handler, true);
+                WriteVerbose("Using one-off connection mode");
+            }
+            else if (AcuConnectionManager.IsConnected)
+            {
+                // Shared connection mode
+                _useSharedConnection = true;
+                _effectiveUrl = AcuConnectionManager.Url;
+                Client = AcuConnectionManager.Client;
+                WriteVerbose($"Using shared connection to {_effectiveUrl}");
+            }
+            else
+            {
+                // No connection available
+                throw new InvalidOperationException(
+                    "Not connected to an Acumatica instance. " +
+                    "Use Connect-AcuInstance first, or provide -Url and -Credential parameters.");
+            }
         }
 
         protected override void ProcessRecord()
         {
             try
             {
-                Login();
+                if (!_useSharedConnection)
+                {
+                    Login();
+                }
                 PerformApiOperations();
             }
             catch (Exception e)
             {
-                WriteError(new ErrorRecord(e, "AcuApiConnectionError", ErrorCategory.ConnectionError, Url));
+                WriteError(new ErrorRecord(e, "AcuApiConnectionError", ErrorCategory.ConnectionError, _effectiveUrl));
             }
             finally
             {
-                Logout();
+                if (!_useSharedConnection)
+                {
+                    Logout();
+                }
             }
         }
 
@@ -67,7 +97,10 @@ namespace AcuPackageTools.CmdletBase
 
         protected override void EndProcessing()
         {
-            Dispose();
+            if (!_useSharedConnection)
+            {
+                Dispose();
+            }
         }
 
         private void Login()
@@ -81,11 +114,13 @@ namespace AcuPackageTools.CmdletBase
             _loggedIn = true;
         }
 
+        protected string EffectiveUrl => _effectiveUrl;
+
         protected JsonDocument SendRequest(string resource, object body = null)
         {
-            var uriBuilder = new UriBuilder(Url);
+            var uriBuilder = new UriBuilder(_effectiveUrl);
             uriBuilder.Path += resource;
-            var                 url = uriBuilder.ToString();
+            var url = uriBuilder.ToString();
             HttpResponseMessage response;
             if (body is null)
             {
@@ -98,7 +133,7 @@ namespace AcuPackageTools.CmdletBase
                 string requestContent = JsonSerializer.Serialize(body, new JsonSerializerOptions
                 {
                     DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingDefault,
-                    WriteIndented          = true
+                    WriteIndented = true
                 });
                 response = Client.PostAsync(url, new StringContent(requestContent, Encoding.UTF8, "application/json"))
                                  .GetAwaiter().GetResult();
@@ -154,7 +189,7 @@ namespace AcuPackageTools.CmdletBase
         protected virtual void Dispose(bool disposing)
         {
             if (_disposed) return;
-            if (disposing)
+            if (disposing && !_useSharedConnection)
             {
                 Client?.Dispose();
             }
@@ -163,7 +198,10 @@ namespace AcuPackageTools.CmdletBase
 
         protected override void StopProcessing()
         {
-            Dispose();
+            if (!_useSharedConnection)
+            {
+                Dispose();
+            }
             base.StopProcessing();
         }
     }
