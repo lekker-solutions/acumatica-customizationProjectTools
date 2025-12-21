@@ -16,6 +16,7 @@ Install-Module -Name AcuPackageTools
 |--------|-------------|
 | `New-AcuPackage` | Build a customization package ZIP from a directory |
 | `Import-AcuPackage` | Upload a package to an Acumatica instance |
+| `Export-AcuPackage` | Download a package from an Acumatica instance |
 | `Publish-AcuPackage` | Publish uploaded packages to an instance |
 | `Unpublish-AcuPackages` | Unpublish all packages from an instance |
 | `Remove-AcuPackage` | Delete an unpublished package from an instance |
@@ -111,6 +112,41 @@ Import-AcuPackage -Url "https://acumatica.example.com" `
                   -PackageName "MyPackage" `
                   -PackagePath ".\Output\MyPackage.zip" `
                   -ReplacePackage
+```
+
+---
+
+### Export-AcuPackage
+
+Download a customization package from an Acumatica ERP instance. Useful for retrieving packages from one environment (e.g., development) to deploy on another (e.g., testing).
+
+**Parameters:**
+
+| Parameter | Alias | Type | Required | Description |
+|-----------|-------|------|----------|-------------|
+| Url | | string | Yes | URL of the Acumatica instance |
+| Credential | | PSCredential | Yes | Credentials for authentication |
+| Tenant | -t | string | No | Tenant to authenticate to |
+| ProjectName | -pn | string | Yes | Name of the project to export |
+| OutputPath | -o, -pp | string | Yes | Path where the .zip file will be saved |
+| AutoResolveConflicts | | switch | No | Include file system changes if conflicts exist |
+
+**Example:**
+```powershell
+$cred = Get-Credential
+
+# Export a package
+Export-AcuPackage -Url "https://acumatica.example.com" `
+                  -Credential $cred `
+                  -ProjectName "MyPackage" `
+                  -OutputPath ".\Downloads\MyPackage.zip"
+
+# Export with file system changes included
+Export-AcuPackage -Url "https://acumatica.example.com" `
+                  -Credential $cred `
+                  -ProjectName "MyPackage" `
+                  -OutputPath ".\Downloads\MyPackage.zip" `
+                  -AutoResolveConflicts
 ```
 
 ---

@@ -75,6 +75,7 @@ RootModule = '.\bin\Release\netstandard2.0\AcuPackageTools.dll'
     CmdletsToExport      = @(
         'New-AcuPackage',
         'Import-AcuPackage',
+        'Export-AcuPackage',
         'Publish-AcuPackage',
         'Unpublish-AcuPackages',
         'Remove-AcuPackage'
