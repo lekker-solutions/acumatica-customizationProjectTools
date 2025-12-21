@@ -76,7 +76,8 @@ RootModule = '.\bin\Release\netstandard2.0\AcuPackageTools.dll'
         'New-AcuPackage',
         'Import-AcuPackage',
         'Publish-AcuPackage',
-        'Unpublish-AcuPackages'
+        'Unpublish-AcuPackages',
+        'Remove-AcuPackage'
     )
 
 # Variables to export from this module

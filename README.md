@@ -18,6 +18,7 @@ Install-Module -Name AcuPackageTools
 | `Import-AcuPackage` | Upload a package to an Acumatica instance |
 | `Publish-AcuPackage` | Publish uploaded packages to an instance |
 | `Unpublish-AcuPackages` | Unpublish all packages from an instance |
+| `Remove-AcuPackage` | Delete an unpublished package from an instance |
 
 Discover all cmdlets:
 ```powershell
@@ -182,6 +183,39 @@ Unpublish-AcuPackages -Url "https://acumatica.example.com" `
                       -Credential $cred `
                       -TenantMode Current `
                       -Confirm:$false
+```
+
+---
+
+### Remove-AcuPackage
+
+Delete an unpublished customization project from an Acumatica ERP instance. Supports `-WhatIf` and `-Confirm` (high impact - will prompt by default).
+
+> **Note:** You can only delete packages that are **not currently published**. The API deletes project data and project items from the database, but does not delete files/objects added by the project (site map nodes, reports, etc.).
+
+**Parameters:**
+
+| Parameter | Alias | Type | Required | Description |
+|-----------|-------|------|----------|-------------|
+| Url | | string | Yes | URL of the Acumatica instance |
+| Credential | | PSCredential | Yes | Credentials for authentication |
+| Tenant | -t | string | No | Tenant to authenticate to |
+| ProjectName | -pn | string | Yes | Name of the project to delete |
+
+**Example:**
+```powershell
+$cred = Get-Credential
+
+# Will prompt for confirmation due to high impact
+Remove-AcuPackage -Url "https://acumatica.example.com" `
+                  -Credential $cred `
+                  -ProjectName "MyOldPackage"
+
+# Preview what would happen
+Remove-AcuPackage -Url "https://acumatica.example.com" `
+                  -Credential $cred `
+                  -ProjectName "MyOldPackage" `
+                  -WhatIf
 ```
 
 ---
