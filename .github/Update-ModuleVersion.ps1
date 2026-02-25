@@ -4,9 +4,12 @@
 param(
     [Parameter(Mandatory=$true)]
     [string]$GitHubTag,
-    
+
     [Parameter(Mandatory=$false)]
-    [string]$ManifestPath = ".\AcuPackageTools\AcuPackageTools.psd1"
+    [string]$ManifestPath = ".\AcuPackageTools\AcuPackageTools.psd1",
+
+    [Parameter(Mandatory=$false)]
+    [string]$ReleaseNotes = ""
 )
 
 # Ensure the manifest file exists
@@ -60,4 +63,13 @@ if ($prereleaseMatch) {
     if ($newManifest.PrivateData.PSData.Prerelease -eq $prerelease) {
         Write-Host "Prerelease tag updated to: $prerelease" -ForegroundColor Green
     }
+}
+
+# Update ReleaseNotes if provided
+if ($ReleaseNotes -ne "") {
+    $escapedNotes = $ReleaseNotes.Trim() -replace "'", "''"
+    $updatedContent = Get-Content -Path $ManifestPath -Raw
+    $updatedContent = $updatedContent -replace "#\s*ReleaseNotes\s*=\s*['`"].*?['`"]", "ReleaseNotes = '$escapedNotes'"
+    Set-Content -Path $ManifestPath -Value $updatedContent
+    Write-Host "Release notes updated." -ForegroundColor Green
 }

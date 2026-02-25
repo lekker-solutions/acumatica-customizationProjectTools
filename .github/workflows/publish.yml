@@ -2,7 +2,8 @@ name: Publish PowerShell Module
 on:
     push:
         tags:
-          - '*'
+          - '[0-9]*.[0-9]*.[0-9]*'
+          - 'v[0-9]*.[0-9]*.[0-9]*'
 jobs:
   publish:
     runs-on: windows-latest
@@ -40,8 +41,11 @@ jobs:
       shell: pwsh
       run: |
         $tag = $env:GITHUB_REF -replace 'refs/tags/', ''
+        $commitMsg = git log -1 --pretty=%B
+        $releaseNotes = ($commitMsg -join "`n").Trim()
         Write-Host "GitHub Tag: $tag"
-        .\.github\Update-ModuleVersion.ps1 -GitHubTag $tag
+        Write-Host "Release Notes: $releaseNotes"
+        .\.github\Update-ModuleVersion.ps1 -GitHubTag $tag -ReleaseNotes $releaseNotes
 
     - name: Test Module Manifest before Publish
       shell: pwsh
