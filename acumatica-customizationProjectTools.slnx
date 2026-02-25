@@ -8,10 +8,10 @@
   <Folder Name="/info/actions/">
     <File Path=".github/workflows/publish.yml" />
   </Folder>
-  <Folder Name="/Tests/">
-    <File Path="AcuPackageTools.Tests/AcuPackage.24_1.Tests.ps1" />
-    <File Path="AcuPackageTools.Tests/AcuPackage.24_2.Tests.ps1" />
-    <File Path="AcuPackageTools.Tests/New-AcuPackage.Tests.ps1" />
+  <Folder Name="/tests/">
+    <File Path="tests/AcuPackage.24_1.Tests.ps1" />
+    <File Path="tests/AcuPackage.24_2.Tests.ps1" />
+    <File Path="tests/New-AcuPackage.Tests.ps1" />
   </Folder>
-  <Project Path="AcuPackageTools/AcuPackageTools.csproj" />
+  <Project Path="src/AcuPackageTools/AcuPackageTools.csproj" />
 </Solution>

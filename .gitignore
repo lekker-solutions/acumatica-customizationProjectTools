@@ -1,10 +1,11 @@
 \.vs
 \.idea
 
-
 # Output
-*/bin/*
-*/obj/*
+src/*/bin
+src/*/obj
+AcuPackageTools/*.dll
+AcuPackageTools/*.pdb
 
 PackageToolsTest_24_1/*
 PackageToolsTest_24_2/*

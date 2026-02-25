@@ -10,10 +10,10 @@ jobs:
     - uses: actions/checkout@v4
 
     - name: Restore dependencies
-      run: dotnet restore acumatica-customizationProjectTools.sln
+      run: dotnet restore acumatica-customizationProjectTools.slnx
 
     - name: Build module in Release mode
-      run: dotnet build acumatica-customizationProjectTools.sln -c Release
+      run: dotnet build acumatica-customizationProjectTools.slnx -c Release
 
     - name: Install Pester
       shell: pwsh
@@ -23,7 +23,7 @@ jobs:
     - name: Run Unit Tests
       shell: pwsh
       run: |
-        $testResults = Invoke-Pester -Path .\AcuPackageTools.Tests -ExcludeTag Integration -PassThru -OutputFormat NUnitXml -OutputFile TestResults.xml
+        $testResults = Invoke-Pester -Path .\tests -ExcludeTag Integration -PassThru -OutputFormat NUnitXml -OutputFile TestResults.xml
         if ($testResults.FailedCount -gt 0) {
           Write-Error "Failed $($testResults.FailedCount) tests"
           exit 1
