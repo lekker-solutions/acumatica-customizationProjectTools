@@ -21,6 +21,7 @@ Install-Module -Name AcuPackageTools
 | `Export-AcuPackage` | Download a package from an Acumatica instance |
 | `Publish-AcuPackage` | Publish uploaded packages to an instance |
 | `Unpublish-AcuPackages` | Unpublish all packages from an instance |
+| `Get-AcuPublishedPackages` | List currently published packages on an instance |
 | `Remove-AcuPackage` | Delete an unpublished package from an instance |
 
 Discover all cmdlets:
@@ -218,6 +219,35 @@ Export-AcuPackage -Url "https://acumatica.example.com" `
 
 ---
 
+### Get-AcuPublishedPackages
+
+Retrieve the list of currently published customization packages and their items from an Acumatica ERP instance. Returns a response object containing `Projects` (names of published packages) and `Items` (customization items such as screens, DACs, and actions).
+
+**Parameters:**
+
+| Parameter | Alias | Type | Required | Description |
+|-----------|-------|------|----------|-------------|
+| Url | | string | Yes | URL of the Acumatica instance |
+| Credential | | PSCredential | Yes | Credentials for authentication |
+| Tenant | -t | string | No | Tenant to authenticate to |
+
+**Example:**
+```powershell
+$cred = Get-Credential
+
+# List published packages
+$published = Get-AcuPublishedPackages -Url "https://acumatica.example.com" -Credential $cred
+$published.Projects | ForEach-Object { Write-Host $_.Name }
+
+# With connection mode
+Connect-AcuInstance -Url "https://acumatica.example.com" -Credential $cred
+$published = Get-AcuPublishedPackages
+$published.Projects.Name  # List package names
+$published.Items           # List customization items
+```
+
+---
+
 ### Publish-AcuPackage
 
 Publish uploaded packages to an Acumatica ERP instance. Supports `-WhatIf` and `-Confirm`.
@@ -373,6 +403,12 @@ If upgrading from a previous version, note these breaking changes:
 | `Invoke-ApiPackageUpload` | `Import-AcuPackage` |
 | `Invoke-ApiPackagePublish` | `Publish-AcuPackage` |
 | `Invoke-ApiPackageUnpublishAll` | `Unpublish-AcuPackages` |
+
+**New in v1.0** (no v0.x equivalent):
+- `Connect-AcuInstance` / `Disconnect-AcuInstance` — persistent connection mode
+- `Export-AcuPackage` — download packages from an instance
+- `Get-AcuPublishedPackages` — query published packages
+- `Remove-AcuPackage` — delete unpublished packages
 
 **Authentication changed** from `-Username`/`-Password` to `-Credential`:
 
