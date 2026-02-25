@@ -1,26 +1,23 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
 namespace AcuPackageTools.Models;
 
-public record ApiResponseRoot(List<Log> Log)
+public class ApiResponseRoot
 {
-    [JsonPropertyName("log")] public List<Log> Log { get; } = Log;
+    [JsonPropertyName("log")]
+    public List<Log> Log { get; set; }
 }
 
-public record Log(
-    DateTime Timestamp,
-    string LogType,
-    string Message
-)
+public class Log
 {
     [JsonPropertyName("timestamp")]
-    public DateTime Timestamp { get; } = Timestamp;
+    public DateTime Timestamp { get; set; }
 
     [JsonPropertyName("logType")]
-    public string LogType { get; } = LogType;
+    public string LogType { get; set; }
 
     [JsonPropertyName("message")]
-    public string Message { get; } = Message;
+    public string Message { get; set; }
 }

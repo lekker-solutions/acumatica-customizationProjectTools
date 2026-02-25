@@ -9,9 +9,9 @@
 @{
 
 # Script module or binary module file associated with this manifest.
-RootModule = '.\bin\Release\netstandard2.0\AcuPackageTools.dll'
+    RootModule           = '.\bin\Release\netstandard2.0\AcuPackageTools.dll'
 
-# Version number of this module.
+    # Version number of this module.
     ModuleVersion        = '1.0.0'
 
     # Supported PSEditions
@@ -33,7 +33,7 @@ RootModule = '.\bin\Release\netstandard2.0\AcuPackageTools.dll'
     Description          = 'Module for building and publishing Acumatica customization projects'
 
     # Minimum version of the PowerShell engine required by this module
-    # PowerShellVersion = ''
+    PowerShellVersion    = '5.1'
 
     # Name of the PowerShell host required by this module
     # PowerShellHostName = ''
@@ -69,7 +69,7 @@ RootModule = '.\bin\Release\netstandard2.0\AcuPackageTools.dll'
     # NestedModules = @()
 
     # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
-    FunctionsToExport    = ''
+    FunctionsToExport    = @()
 
     # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
     CmdletsToExport      = @(
@@ -80,62 +80,63 @@ RootModule = '.\bin\Release\netstandard2.0\AcuPackageTools.dll'
         'Export-AcuPackage',
         'Publish-AcuPackage',
         'Unpublish-AcuPackages',
-        'Remove-AcuPackage'
+        'Remove-AcuPackage',
+        'Get-AcuPublishedPackages'
     )
 
-# Variables to export from this module
-VariablesToExport = ''
+    # Variables to export from this module
+    VariablesToExport    = @()
 
-# Aliases to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no aliases to export.
-AliasesToExport = ''
+    # Aliases to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no aliases to export.
+    AliasesToExport      = @()
 
-# DSC resources to export from this module
-# DscResourcesToExport = @()
+    # DSC resources to export from this module
+    # DscResourcesToExport = @()
 
-# List of all modules packaged with this module
-# ModuleList = @()
+    # List of all modules packaged with this module
+    # ModuleList = @()
 
-# List of all files packaged with this module
-# FileList = @()
+    # List of all files packaged with this module
+    # FileList = @()
 
-# Private data to pass to the module specified in RootModule/ModuleToProcess. This may also contain a PSData hashtable with additional module metadata used by PowerShell.
-PrivateData = @{
+    # Private data to pass to the module specified in RootModule/ModuleToProcess. This may also contain a PSData hashtable with additional module metadata used by PowerShell.
+    PrivateData          = @{
 
-    PSData = @{
+        PSData = @{
 
-        # Tags applied to this module. These help with module discovery in online galleries.
-        Tags = @('Acumatica')
+            # Tags applied to this module. These help with module discovery in online galleries.
+            Tags       = @('Acumatica')
 
-        # A URL to the license for this module.
-        LicenseUri = 'https://www.mit.edu/~amini/LICENSE.md'
+            # A URL to the license for this module.
+            LicenseUri = 'https://www.mit.edu/~amini/LICENSE.md'
 
-        # A URL to the main website for this project.
-        ProjectUri = 'https://github.com/lekker-solutions/acumatica-customizationProjectTools'
+            # A URL to the main website for this project.
+            ProjectUri = 'https://github.com/lekker-solutions/acumatica-customizationProjectTools'
 
-        # A URL to an icon representing this module.
-        # IconUri = ''
+            # A URL to an icon representing this module.
+            # IconUri = ''
 
-        # ReleaseNotes of this module
-        # ReleaseNotes = ''
+            # ReleaseNotes of this module
+            # ReleaseNotes = ''
 
-        # Prerelease string of this module
-        # Prerelease = ''
+            # Prerelease string of this module
+            # Prerelease = ''
 
-        # Flag to indicate whether the module requires explicit user acceptance for install/update/save
-        # RequireLicenseAcceptance = $false
+            # Flag to indicate whether the module requires explicit user acceptance for install/update/save
+            # RequireLicenseAcceptance = $false
 
-        # External dependent modules of this module
-        # ExternalModuleDependencies = @()
+            # External dependent modules of this module
+            # ExternalModuleDependencies = @()
 
-    } # End of PSData hashtable
+        } # End of PSData hashtable
 
-} # End of PrivateData hashtable
+    } # End of PrivateData hashtable
 
-# HelpInfo URI of this module
-HelpInfoURI = 'https://github.com/lekker-solutions/acumatica-customizationProjectTools'
+    # HelpInfo URI of this module
+    HelpInfoURI          = 'https://github.com/lekker-solutions/acumatica-customizationProjectTools'
 
-# Default prefix for commands exported from this module. Override the default prefix using Import-Module -Prefix.
-# DefaultCommandPrefix = ''
+    # Default prefix for commands exported from this module. Override the default prefix using Import-Module -Prefix.
+    # DefaultCommandPrefix = ''
 
 }
 

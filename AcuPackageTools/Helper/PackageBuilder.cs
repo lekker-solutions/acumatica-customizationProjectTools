@@ -1,15 +1,4 @@
-﻿#region #Copyright
-
-//  ----------------------------------------------------------------------------------
-//   COPYRIGHT (c) 2023 CONTOU CONSULTING
-//   ALL RIGHTS RESERVED
-//   AUTHOR: Kyle Vanderstoep
-//   CREATED DATE: 2023/04/05
-// ----------------------------------------------------------------------------------
-
-#endregion
-
-using System;
+﻿using System;
 using System.IO;
 using System.IO.Compression;
 using System.Xml;
@@ -55,7 +44,7 @@ namespace AcuPackageTools.Helper
                     //Append every other files directly, flattening the file name in the process
                     foreach (var directory in Directory.GetDirectories(customizationPath))
                     {
-                        if (directory.EndsWith(@"\_project")) continue;
+                        if (Path.GetFileName(directory).Equals("_project", StringComparison.OrdinalIgnoreCase)) continue;
                         AddAssetsToPackage(archive, directory, customizationPath, customizationNode, writeVerbose);
                     }
 

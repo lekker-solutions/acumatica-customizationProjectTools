@@ -1,13 +1,15 @@
 name: Test PowerShell Module
 on:
     push:
-        tags:
-          - '*'
+        branches: ['*']
+    pull_request:
+        branches: [main]
+
 jobs:
-  publish:
+  test:
     runs-on: windows-latest
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
 
     - name: Restore dependencies
       run: dotnet restore acumatica-customizationProjectTools.sln
@@ -16,25 +18,25 @@ jobs:
       run: dotnet build acumatica-customizationProjectTools.sln -c Release
 
     - name: Test Module Manifest
+      shell: pwsh
       run: Test-ModuleManifest -Path .\AcuPackageTools\AcuPackageTools.psd1
 
     - name: Install Pester
+      shell: pwsh
       run: Install-Module -Name Pester -Force -SkipPublisherCheck
 
-    - name: Import Built Module
+    - name: Run Unit Tests
+      shell: pwsh
       run: |
-        $modulePath = Join-Path $PSScriptRoot ".\AcuPackageTools\AcuPackageTools.psd1" 
-        Import-Module -Name $modulePath
+        $testResults = Invoke-Pester -Path .\AcuPackageTools.Tests -ExcludeTag Integration -PassThru -OutputFormat NUnitXml -OutputFile TestResults.xml
+        if ($testResults.FailedCount -gt 0) {
+          Write-Error "Failed $($testResults.FailedCount) tests"
+          exit 1
+        }
 
-    - name: Test Api Cmdlets
-      run: Invoke-Pester -Path .\AcuPackageTools.Tests\Invoke-ApiPackage.Test.ps1
-
-    - name: Test Service Cmdlets
-      run: Invoke-Pester -Path .\AcuPackageTools.Tests\Invoke-ServicePackage.Test.ps1
-
-    - name: Test PackageBuild Cmdlets
-      run: Invoke-Pester -Path .\AcuPackageTools.Tests\Invoke-PackageBuild.Test.ps1
-
-    - name: Test Module Manifest
-      run: Test-ModuleManifest -Path .\AcuPackageTools\AcuPackageTools.psd1
-
+    - name: Upload Test Results
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: test-results
+        path: TestResults.xml

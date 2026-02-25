@@ -36,7 +36,7 @@ namespace AcuPackageTools
 
         protected override void PerformApiOperations()
         {
-            WriteVerbose($"Exporting project '{ProjectName}' from {Url}");
+            WriteVerbose($"Exporting project '{ProjectName}' from {EffectiveUrl}");
 
             using var response = SendRequest(GetProjectEndpoint,
                 new GetProjectRequest(ProjectName, AutoResolveConflicts.IsPresent));

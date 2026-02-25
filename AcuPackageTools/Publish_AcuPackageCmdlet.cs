@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Management.Automation;
-using System.Net;
+using System.Net.Http;
 using System.Text.Json;
 using System.Threading;
 using AcuPackageTools.CmdletBase;
@@ -81,17 +81,16 @@ namespace AcuPackageTools
                         TenantMode,
                         TenantLoginNames));
 
-            PublishEndResponse responseData;
             HashSet<DateTime> existingTimeStamps = new();
-            bool isCompleted = false;
-            bool isFailed = false;
             var progressRecord = new ProgressRecord(1, "Publishing Packages", "Starting publication...");
             int elapsedSeconds = 0;
 
+            PublishEndResponse responseData;
             do
             {
                 using var endResponse = SendRequest(PublishEndEndpoint);
-                responseData = endResponse.Deserialize<PublishEndResponse>();
+                responseData = JsonSerializer.Deserialize<PublishEndResponse>(
+                    endResponse.RootElement.GetRawText(), SerializerOptions);
 
                 foreach (var log in responseData.Log)
                 {
@@ -100,6 +99,9 @@ namespace AcuPackageTools
                     {
                         case "information":
                             WriteInformation(new InformationRecord(log.Message, "Customization API"));
+                            break;
+                        case "warning":
+                            WriteWarning(log.Message);
                             break;
                         case "error":
                             WriteWarning(log.Message);
@@ -113,22 +115,17 @@ namespace AcuPackageTools
                 progressRecord.StatusDescription = $"Waiting for completion... ({elapsedSeconds}s)";
                 WriteProgress(progressRecord);
 
-                Thread.Sleep(1000);
+                if (!responseData.IsCompleted && !responseData.IsFailed)
+                    Thread.Sleep(1000);
 
-                JsonElement value;
-                endResponse.RootElement.TryGetProperty("isCompleted", out value);
-                isCompleted = value.GetBoolean();
-                endResponse.RootElement.TryGetProperty("isFailed", out value);
-                isFailed = value.GetBoolean();
-
-                if (isFailed)
+                if (responseData.IsFailed)
                     WriteError(
                         new ErrorRecord(
-                            new HttpListenerException(500, "Package publication failed"),
+                            new HttpRequestException("Customization publish failed. Check the log output for details."),
                             "AcuPublishFailed",
-                            ErrorCategory.ReadError,
+                            ErrorCategory.NotSpecified,
                             ProjectNames));
-            } while (!isCompleted && !isFailed);
+            } while (!responseData.IsCompleted && !responseData.IsFailed);
 
             progressRecord.RecordType = ProgressRecordType.Completed;
             WriteProgress(progressRecord);

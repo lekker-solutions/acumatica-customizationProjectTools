@@ -7,7 +7,7 @@ jobs:
   publish:
     runs-on: windows-latest
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
 
     - name: Restore dependencies
       run: dotnet restore acumatica-customizationProjectTools.sln
@@ -20,17 +20,17 @@ jobs:
       run: |
         Install-Module -Name Pester -Force -SkipPublisherCheck
 
-    - name: Run Pester Tests
+    - name: Run Unit Tests
       shell: pwsh
       run: |
-        $testResults = Invoke-Pester -Path .\AcuPackageTools.Tests -PassThru -OutputFormat NUnitXml -OutputFile TestResults.xml
+        $testResults = Invoke-Pester -Path .\AcuPackageTools.Tests -ExcludeTag Integration -PassThru -OutputFormat NUnitXml -OutputFile TestResults.xml
         if ($testResults.FailedCount -gt 0) {
           Write-Error "Failed $($testResults.FailedCount) tests"
           exit 1
         }
 
     - name: Upload Test Results
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       if: always()
       with:
         name: test-results
@@ -44,10 +44,12 @@ jobs:
         .\.github\Update-ModuleVersion.ps1 -GitHubTag $tag
 
     - name: Test Module Manifest before Publish
+      shell: pwsh
       run: Test-ModuleManifest -Path .\AcuPackageTools\AcuPackageTools.psd1
 
     - name: Publish to PowerShell Gallery
+      shell: pwsh
       env:
           NUGET_API_KEY: ${{ secrets.POWERSHELL_GALLERY_API_KEY }}
       run: |
-          Publish-Module -Path .\AcuPackageTools -NuGetApiKey ${{ secrets.POWERSHELL_GALLERY_API_KEY }} -Verbose
+          Publish-Module -Path .\AcuPackageTools -NuGetApiKey $env:NUGET_API_KEY -Verbose

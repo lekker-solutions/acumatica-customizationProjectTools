@@ -1,6 +1,6 @@
-using System;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
 
 namespace AcuPackageTools.Connection
 {
@@ -65,7 +65,10 @@ namespace AcuPackageTools.Connection
             {
                 CookieContainer = new CookieContainer()
             };
-            return new HttpClient(handler, true);
+            var client = new HttpClient(handler, true);
+            client.DefaultRequestHeaders.Accept.Add(
+                new MediaTypeWithQualityHeaderValue("application/json"));
+            return client;
         }
     }
 }

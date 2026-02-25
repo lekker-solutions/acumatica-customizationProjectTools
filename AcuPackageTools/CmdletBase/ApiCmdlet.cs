@@ -1,6 +1,5 @@
 using System;
 using System.Management.Automation;
-using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
@@ -16,6 +15,13 @@ namespace AcuPackageTools.CmdletBase
         private bool _loggedIn;
         private bool _useSharedConnection;
         private string _effectiveUrl;
+
+        internal static readonly JsonSerializerOptions SerializerOptions = new JsonSerializerOptions
+        {
+            DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingDefault,
+            WriteIndented = true,
+            Converters = { new JsonStringEnumConverter() }
+        };
 
         [Parameter(
             Mandatory = false,
@@ -46,11 +52,7 @@ namespace AcuPackageTools.CmdletBase
                 // One-off mode: credentials provided explicitly
                 _useSharedConnection = false;
                 _effectiveUrl = Url;
-                var handler = new HttpClientHandler()
-                {
-                    CookieContainer = new CookieContainer()
-                };
-                Client = new HttpClient(handler, true);
+                Client = AcuConnectionManager.CreateNewClient();
                 WriteVerbose("Using one-off connection mode");
             }
             else if (AcuConnectionManager.IsConnected)
@@ -82,7 +84,10 @@ namespace AcuPackageTools.CmdletBase
             }
             catch (Exception e)
             {
-                WriteError(new ErrorRecord(e, "AcuApiConnectionError", ErrorCategory.ConnectionError, _effectiveUrl));
+                var category = e is HttpRequestException
+                    ? ErrorCategory.ConnectionError
+                    : ErrorCategory.NotSpecified;
+                WriteError(new ErrorRecord(e, "AcuApiRequestFailed", category, _effectiveUrl));
             }
             finally
             {
@@ -130,11 +135,7 @@ namespace AcuPackageTools.CmdletBase
             }
             else
             {
-                string requestContent = JsonSerializer.Serialize(body, new JsonSerializerOptions
-                {
-                    DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingDefault,
-                    WriteIndented = true
-                });
+                string requestContent = JsonSerializer.Serialize(body, SerializerOptions);
                 response = Client.PostAsync(url, new StringContent(requestContent, Encoding.UTF8, "application/json"))
                                  .GetAwaiter().GetResult();
                 WriteVerbose($"Posting content to " + url);
@@ -147,18 +148,18 @@ namespace AcuPackageTools.CmdletBase
                 : JsonDocument.Parse(responseContent);
             if (!response.IsSuccessStatusCode
              && !string.IsNullOrWhiteSpace(responseContent))
-                throw new HttpListenerException((int)response.StatusCode,
-                    $"There was a failure when calling {url}: "
+                throw new HttpRequestException(
+                    $"There was a failure when calling {url} (HTTP {(int)response.StatusCode}): "
                   + Environment.NewLine
-                  + JsonSerializer.Serialize(jDoc, new JsonSerializerOptions { WriteIndented = true }));
+                  + JsonSerializer.Serialize(jDoc, SerializerOptions));
 
             if (!response.IsSuccessStatusCode)
             {
-                throw new HttpListenerException((int)response.StatusCode,
-                    $"There was a failure when calling {url}");
+                throw new HttpRequestException(
+                    $"There was a failure when calling {url} (HTTP {(int)response.StatusCode})");
             }
 
-            WriteVerbose(JsonSerializer.Serialize(jDoc, new JsonSerializerOptions { WriteIndented = true }));
+            WriteVerbose(JsonSerializer.Serialize(jDoc, SerializerOptions));
 
             return jDoc;
         }

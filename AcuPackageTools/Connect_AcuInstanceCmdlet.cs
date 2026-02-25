@@ -1,11 +1,11 @@
-using System;
-using System.Management.Automation;
-using System.Net;
-using System.Net.Http;
 using System.Text;
 using System.Text.Json;
+using System;
+using System.Management.Automation;
+using System.Net.Http;
 using AcuPackageTools.Connection;
 using AcuPackageTools.Models;
+using AcuPackageTools.CmdletBase;
 
 namespace AcuPackageTools
 {
@@ -57,10 +57,7 @@ namespace AcuPackageTools
                 uriBuilder.Path += "/entity/auth/login";
                 var loginUrl = uriBuilder.ToString();
 
-                var requestContent = JsonSerializer.Serialize(loginRequest, new JsonSerializerOptions
-                {
-                    DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault
-                });
+                var requestContent = JsonSerializer.Serialize(loginRequest, ApiCmdlet.SerializerOptions);
 
                 WriteVerbose($"Connecting to {Url}...");
 
@@ -72,8 +69,8 @@ namespace AcuPackageTools
                 {
                     var errorContent = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
                     client.Dispose();
-                    throw new HttpListenerException((int)response.StatusCode,
-                        $"Failed to connect to {Url}: {errorContent}");
+                    throw new HttpRequestException(
+                        $"Failed to connect to {Url} (HTTP {(int)response.StatusCode}): {errorContent}");
                 }
 
                 AcuConnectionManager.SetConnection(client, Url, Tenant);

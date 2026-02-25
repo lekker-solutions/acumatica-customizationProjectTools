@@ -56,15 +56,12 @@ namespace AcuPackageTools
                 throw new InvalidOperationException("File does not exist at path: " + PackagePath);
             }
 
-            var binData = File.OpenRead(PackagePath);
-            var binDataMemoryStream = new MemoryStream();
-            binData.CopyTo(binDataMemoryStream);
-            binData.Dispose();
+            var fileBytes = File.ReadAllBytes(PackagePath);
             var request =
                 new ImportPackageRequest(Level,
                     ReplacePackage,
                     PackageName, PackageDescr,
-                Convert.ToBase64String(binDataMemoryStream.ToArray()));
+                    Convert.ToBase64String(fileBytes));
 
             using var response = SendRequest(ImportEndpoint, request);
             var responseObject = response.Deserialize<ApiResponseRoot>();
