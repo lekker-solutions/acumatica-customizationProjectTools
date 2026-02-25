@@ -1,16 +1,11 @@
-﻿using System;
 using System.Management.Automation;
-using System.Net;
-using System.Net.Http;
-using System.Text.Json;
-using System.Text.Json.Serialization;
 using AcuPackageTools.CmdletBase;
 using AcuPackageTools.Models;
 
 namespace AcuPackageTools
 {
-    [Cmdlet(VerbsLifecycle.Invoke, "ApiPackageUnpublishAll")]
-    public class Invoke_ApiPackageUnpublishAllCmdlet : ApiCmdlet
+    [Cmdlet(VerbsData.Unpublish, "AcuPackages", SupportsShouldProcess = true, ConfirmImpact = ConfirmImpact.High)]
+    public class Unpublish_AcuPackagesCmdlet : ApiCmdlet
     {
         [Parameter(
             Mandatory = true,
@@ -27,9 +22,13 @@ namespace AcuPackageTools
         public string[] TenantLoginNames { get; set; }
 
         public const string UnpublishAllEndpoint = "/CustomizationApi/unpublishAll";
+
         protected override void PerformApiOperations()
         {
-            using var response = SendRequest( UnpublishAllEndpoint, new UnpublishAllRequest(TenantMode, TenantLoginNames));
+            if (ShouldProcess(EffectiveUrl, "Unpublish all customization packages"))
+            {
+                using var response = SendRequest(UnpublishAllEndpoint, new UnpublishAllRequest(TenantMode, TenantLoginNames));
+            }
         }
     }
 }

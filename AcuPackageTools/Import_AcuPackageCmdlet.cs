@@ -1,16 +1,14 @@
-﻿using AcuPackageTools.CmdletBase;
+using AcuPackageTools.CmdletBase;
 using System;
 using System.IO;
 using System.Management.Automation;
-using System.Net.Http;
 using System.Text.Json;
-using System.Text.Json.Serialization;
 using AcuPackageTools.Models;
 
 namespace AcuPackageTools
 {
-    [Cmdlet(VerbsLifecycle.Invoke, "ApiPackageUpload")]
-    public class Invoke_ApiPackageUploadCmdlet : ApiCmdlet
+    [Cmdlet(VerbsData.Import, "AcuPackage")]
+    public class Import_AcuPackageCmdlet : ApiCmdlet
     {
         public const string ImportEndpoint = "/CustomizationApi/import";
 
@@ -19,6 +17,7 @@ namespace AcuPackageTools
             ValueFromPipeline = true,
             ValueFromPipelineByPropertyName = true)]
         [Alias("pn")]
+        [ValidateNotNullOrEmpty]
         public string PackageName { get; set; }
 
         [Parameter(
@@ -26,6 +25,7 @@ namespace AcuPackageTools
             ValueFromPipeline = true,
             ValueFromPipelineByPropertyName = true)]
         [Alias("pp")]
+        [ValidateNotNullOrEmpty]
         public string PackagePath { get; set; }
 
         [Parameter(
@@ -60,7 +60,7 @@ namespace AcuPackageTools
             var binDataMemoryStream = new MemoryStream();
             binData.CopyTo(binDataMemoryStream);
             binData.Dispose();
-            var request = 
+            var request =
                 new ImportPackageRequest(Level,
                     ReplacePackage,
                     PackageName, PackageDescr,
@@ -69,7 +69,7 @@ namespace AcuPackageTools
             using var response = SendRequest(ImportEndpoint, request);
             var responseObject = response.Deserialize<ApiResponseRoot>();
 
-            foreach (var log in responseObject.Log)    
+            foreach (var log in responseObject.Log)
             {
                 WriteVerbose(log.Message);
             }

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Management.Automation;
 using System.Net;
@@ -9,14 +9,15 @@ using AcuPackageTools.Models;
 
 namespace AcuPackageTools
 {
-    [Cmdlet(VerbsLifecycle.Invoke, "ApiPackagePublish")]
-    public class Invoke_ApiPackagePublishCmdlet : ApiCmdlet
+    [Cmdlet(VerbsData.Publish, "AcuPackage", SupportsShouldProcess = true)]
+    public class Publish_AcuPackageCmdlet : ApiCmdlet
     {
         [Alias("pn")]
         [Parameter(
             Mandatory = true,
             ValueFromPipeline = true,
             ValueFromPipelineByPropertyName = true)]
+        [ValidateNotNullOrEmpty]
         public string[] ProjectNames { get; set; }
 
         [Parameter(
@@ -63,6 +64,12 @@ namespace AcuPackageTools
 
         protected override void PerformApiOperations()
         {
+            var projectList = string.Join(", ", ProjectNames);
+            if (!ShouldProcess(projectList, "Publish customization packages"))
+            {
+                return;
+            }
+
             using var startResponse =
                 SendRequest(PublishBeginEndpoint,
                     new PublishBeginRequest(
@@ -78,11 +85,13 @@ namespace AcuPackageTools
             HashSet<DateTime> existingTimeStamps = new();
             bool isCompleted = false;
             bool isFailed = false;
+            var progressRecord = new ProgressRecord(1, "Publishing Packages", "Starting publication...");
+            int elapsedSeconds = 0;
+
             do
             {
-                var endResponse = SendRequest(PublishEndEndpoint);
-                responseData =
-                    startResponse.Deserialize<PublishEndResponse>();
+                using var endResponse = SendRequest(PublishEndEndpoint);
+                responseData = endResponse.Deserialize<PublishEndResponse>();
 
                 foreach (var log in responseData.Log)
                 {
@@ -99,9 +108,13 @@ namespace AcuPackageTools
 
                     existingTimeStamps.Add(log.Timestamp);
                 }
+
+                elapsedSeconds++;
+                progressRecord.StatusDescription = $"Waiting for completion... ({elapsedSeconds}s)";
+                WriteProgress(progressRecord);
+
                 Thread.Sleep(1000);
 
-                // For some reason this will NOT DESERALIZE :((((((
                 JsonElement value;
                 endResponse.RootElement.TryGetProperty("isCompleted", out value);
                 isCompleted = value.GetBoolean();
@@ -110,8 +123,15 @@ namespace AcuPackageTools
 
                 if (isFailed)
                     WriteError(
-                        new ErrorRecord(new HttpListenerException(500, ""), "", ErrorCategory.ReadError, default));
+                        new ErrorRecord(
+                            new HttpListenerException(500, "Package publication failed"),
+                            "AcuPublishFailed",
+                            ErrorCategory.ReadError,
+                            ProjectNames));
             } while (!isCompleted && !isFailed);
+
+            progressRecord.RecordType = ProgressRecordType.Completed;
+            WriteProgress(progressRecord);
         }
     }
 }

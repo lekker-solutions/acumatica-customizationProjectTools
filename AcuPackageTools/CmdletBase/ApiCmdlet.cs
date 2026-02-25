@@ -1,38 +1,35 @@
-﻿using System;
+using System;
 using System.Management.Automation;
 using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using AcuPackageTools.Connection;
 
 namespace AcuPackageTools.CmdletBase
 {
-    public abstract class ApiCmdlet : PSCmdlet
+    public abstract class ApiCmdlet : PSCmdlet, IDisposable
     {
         protected HttpClient Client;
-        private   bool       _disposed;
-        private   bool       _loggedIn;
+        private bool _disposed;
+        private bool _loggedIn;
+        private bool _useSharedConnection;
+        private string _effectiveUrl;
 
         [Parameter(
-            Mandatory = true,
+            Mandatory = false,
             ValueFromPipeline = true,
             ValueFromPipelineByPropertyName = true)]
+        [ValidateNotNullOrEmpty]
         public string Url { get; set; }
 
         [Parameter(
-            Mandatory = true,
+            Mandatory = false,
             ValueFromPipeline = true,
             ValueFromPipelineByPropertyName = true)]
-        [Alias("u")]
-        public string Username { get; set; }
-
-        [Parameter(
-            Mandatory = true,
-            ValueFromPipeline = true,
-            ValueFromPipelineByPropertyName = true)]
-        [Alias("p")]
-        public string Password { get; set; }
+        [Credential]
+        public PSCredential Credential { get; set; }
 
         [Parameter(
             Mandatory = false,
@@ -43,29 +40,56 @@ namespace AcuPackageTools.CmdletBase
 
         protected override void BeginProcessing()
         {
-            var handler = new HttpClientHandler()
+            // Determine which mode to use
+            if (Credential != null && !string.IsNullOrEmpty(Url))
             {
-                CookieContainer = new CookieContainer()
-            };
-            Client = new HttpClient(handler, true);
+                // One-off mode: credentials provided explicitly
+                _useSharedConnection = false;
+                _effectiveUrl = Url;
+                var handler = new HttpClientHandler()
+                {
+                    CookieContainer = new CookieContainer()
+                };
+                Client = new HttpClient(handler, true);
+                WriteVerbose("Using one-off connection mode");
+            }
+            else if (AcuConnectionManager.IsConnected)
+            {
+                // Shared connection mode
+                _useSharedConnection = true;
+                _effectiveUrl = AcuConnectionManager.Url;
+                Client = AcuConnectionManager.Client;
+                WriteVerbose($"Using shared connection to {_effectiveUrl}");
+            }
+            else
+            {
+                // No connection available
+                throw new InvalidOperationException(
+                    "Not connected to an Acumatica instance. " +
+                    "Use Connect-AcuInstance first, or provide -Url and -Credential parameters.");
+            }
         }
 
         protected override void ProcessRecord()
         {
-            var loggedIn = false;
             try
             {
-                Login();
-
+                if (!_useSharedConnection)
+                {
+                    Login();
+                }
                 PerformApiOperations();
             }
             catch (Exception e)
             {
-                WriteError(new ErrorRecord(e, "", ErrorCategory.ConnectionError, default));
+                WriteError(new ErrorRecord(e, "AcuApiConnectionError", ErrorCategory.ConnectionError, _effectiveUrl));
             }
             finally
             {
-                Logout();
+                if (!_useSharedConnection)
+                {
+                    Logout();
+                }
             }
         }
 
@@ -73,21 +97,30 @@ namespace AcuPackageTools.CmdletBase
 
         protected override void EndProcessing()
         {
-            DisposeClient();
+            if (!_useSharedConnection)
+            {
+                Dispose();
+            }
         }
 
         private void Login()
         {
-            var loginRequest = new AcuPackageTools.Models.LoginRequest(Username, Password, Tenant);
+            var networkCredential = Credential.GetNetworkCredential();
+            var loginRequest = new AcuPackageTools.Models.LoginRequest(
+                networkCredential.UserName,
+                networkCredential.Password,
+                Tenant);
             SendRequest("/entity/auth/login", loginRequest);
             _loggedIn = true;
         }
 
+        protected string EffectiveUrl => _effectiveUrl;
+
         protected JsonDocument SendRequest(string resource, object body = null)
         {
-            var uriBuilder = new UriBuilder(Url);
+            var uriBuilder = new UriBuilder(_effectiveUrl);
             uriBuilder.Path += resource;
-            var                 url = uriBuilder.ToString();
+            var url = uriBuilder.ToString();
             HttpResponseMessage response;
             if (body is null)
             {
@@ -100,7 +133,7 @@ namespace AcuPackageTools.CmdletBase
                 string requestContent = JsonSerializer.Serialize(body, new JsonSerializerOptions
                 {
                     DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingDefault,
-                    WriteIndented          = true
+                    WriteIndented = true
                 });
                 response = Client.PostAsync(url, new StringContent(requestContent, Encoding.UTF8, "application/json"))
                                  .GetAwaiter().GetResult();
@@ -147,11 +180,29 @@ namespace AcuPackageTools.CmdletBase
             }
         }
 
-        private void DisposeClient()
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
         {
             if (_disposed) return;
-            Client?.Dispose();
+            if (disposing && !_useSharedConnection)
+            {
+                Client?.Dispose();
+            }
             _disposed = true;
+        }
+
+        protected override void StopProcessing()
+        {
+            if (!_useSharedConnection)
+            {
+                Dispose();
+            }
+            base.StopProcessing();
         }
     }
 }

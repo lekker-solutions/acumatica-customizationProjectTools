@@ -1,0 +1,71 @@
+using System;
+using System.Net;
+using System.Net.Http;
+
+namespace AcuPackageTools.Connection
+{
+    /// <summary>
+    /// Manages a shared connection to an Acumatica instance.
+    /// Used by Connect-AcuInstance and API cmdlets.
+    /// </summary>
+    public static class AcuConnectionManager
+    {
+        private static HttpClient _client;
+        private static string _url;
+        private static string _tenant;
+        private static bool _isConnected;
+        private static readonly object _lock = new object();
+
+        public static bool IsConnected
+        {
+            get { lock (_lock) { return _isConnected; } }
+        }
+
+        public static string Url
+        {
+            get { lock (_lock) { return _url; } }
+        }
+
+        public static string Tenant
+        {
+            get { lock (_lock) { return _tenant; } }
+        }
+
+        public static HttpClient Client
+        {
+            get { lock (_lock) { return _client; } }
+        }
+
+        public static void SetConnection(HttpClient client, string url, string tenant)
+        {
+            lock (_lock)
+            {
+                _client = client;
+                _url = url;
+                _tenant = tenant;
+                _isConnected = true;
+            }
+        }
+
+        public static void ClearConnection()
+        {
+            lock (_lock)
+            {
+                _client?.Dispose();
+                _client = null;
+                _url = null;
+                _tenant = null;
+                _isConnected = false;
+            }
+        }
+
+        public static HttpClient CreateNewClient()
+        {
+            var handler = new HttpClientHandler()
+            {
+                CookieContainer = new CookieContainer()
+            };
+            return new HttpClient(handler, true);
+        }
+    }
+}
